@@ -81,7 +81,7 @@ Tiktok-JP：解锁Tiktok日区。
 
 [zw9314](https://github.com/nzw9314/QuantumultX/tree/master)
 
-[w37fhy](https://github.com/w37fhy/QuantumultX/edit/master/README.md)
+[w37fhy](https://github.com/w37fhy/QuantumultX/edit/master)
 
 [DivineEngine](https://github.com/DivineEngine/Profiles/tree/master)
 
