@@ -1,5 +1,6 @@
-
-#每日蚂蚁收能量提醒（每日壹句（有道词典）+ 点击通知跳转支付宝蚂蚁森林页面
+/*
+每日蚂蚁收能量提醒（每日壹句（有道词典）+ 点击通知跳转支付宝蚂蚁森林页面
+*/
 
 const $tool = new Tool()
 $tool.get('https://dict.youdao.com/infoline/style/cardList?mode=publish&client=mobile&style=daily&size=2', function (error, response, data) {
