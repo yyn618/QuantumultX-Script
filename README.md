@@ -39,8 +39,6 @@
 
 京东/淘宝购物比价：其中淘宝不生效或失效的需要卸载重装。
 
-Tiktok-JP：解锁Tiktok日区。
-
 获取Cookie：Task脚本获取Cookie用的，使用时启用，获取后可关闭。获取cookie方法在脚本中查看。
 
 <br>
