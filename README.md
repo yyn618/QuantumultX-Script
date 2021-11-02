@@ -42,7 +42,7 @@
 ### 重写：
 
 - B站换区
-- #Q-Search搜索
+- Q-Search搜索
 - TF区域解锁
 - Netflix评分
 - TikTok 解锁（V21.1.0）：支持JP（默认）、TW、US地区解锁，最新支持版本V21.1.0
