@@ -45,9 +45,10 @@
 - Q-Search搜索
 - TF区域解锁
 - Netflix评分
-- TikTok 解锁（V21.1.0）：支持JP（默认）、TW、US地区解锁，最新支持版本V21.1.0
-- 京东/淘宝购物比价：其中淘宝不生效或失效的需要卸载重装。
-- 获取Cookie：Task脚本获取Cookie用的，使用时启用，获取后可关闭。获取cookie方法在脚本中查看。
+- Youtube去广告：会员勿开
+- TikTok 解锁（V21.1.0）：JP（默认）、TW、US地区解锁，最新支持版本V21.1.0
+- 京东/淘宝购物比价：淘宝比价在商品保障力，不生效或失效的需要卸载重装
+- 获取Cookie：Task脚本获取Cookie用的，使用时启用，获取后可关闭。获取cookie方法在脚本中查看
 
 <br>
 
@@ -55,7 +56,8 @@
 
 > 仅保留个人自用任务脚本，需要其他脚本可自行前往作者主页
 
-- Chuhe：京东签到。
+- Chuhe：京东任务脚本。
+- Faker：京东任务脚本。
 - NobyDa：京东多合一签到。
 - Sunert：微博钱包签到。
 - Yichahucha - 蚂蚁森林、钉钉打卡。
@@ -97,11 +99,19 @@
 
 [lhie1](https://github.com/lhie1/Rules/tree/master/QuantumultX)
 
+[faker](https://github.com/shufflewzc/faker2)
+
 [chavyleung](https://github.com/chavyleung/scripts)
 
 [Chuhe](https://github.com/ChuheGit/1)
 
 [yichahucha](https://github.com/yichahucha/surge)
+
+[Semporia](https://github.com/Semporia/TikTok-Unlock)
+
+[StimeKe](https://github.com/StimeKe?tab=repositories)
+
+[Neurogram-R](https://github.com/Neurogram-R/Surge)
 
 <br>
 
