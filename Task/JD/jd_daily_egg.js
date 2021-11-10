@@ -12,7 +12,11 @@ let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://ms.jr.jd.com/gw/generic/uc/h5/m';
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
+const dailyEggUrl = "https://active.jd.com/forever/btgoose/?channelLv=yxjh&jrcontainer=h5&jrlogin=true"
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
+const { JSDOM } = $.isNode() ? require('jsdom') : '';
+const { window } = new JSDOM(``, { url: dailyEggUrl, runScripts: "outside-only", pretentToBeVisual: true, resources: "usable" })
+const Faker = require('./utils/sign_graphics_validate.js')
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -26,46 +30,40 @@ if ($.isNode()) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
   }
+  window.eval(await downloadUrl(`https://storage.360buyimg.com/rama/common/btgoose/aar.min.js`))
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
       cookie = cookiesArr[i];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
       $.isLogin = true;
-      $.nickName = '';
-      await TotalBean();
-      console.log(`\n***********开始【京东账号${$.index}】${$.nickName || $.UserName}********\n`);
-      if (!$.isLogin) {
-        $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
-
-        if ($.isNode()) {
-          await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
-        }
-        continue
-      }
+      $.stopNext = false
+      console.log(`\n***********开始【京东账号${$.index}】${$.UserName}********\n`);
+      const fakerBody = Faker.getBody(dailyEggUrl)
+      $.fp = fakerBody.fp
+      $.eid = await getClientData(fakerBody)
+      $.token = (await downloadUrl("https://gia.jd.com/m.html")).match(/var\s*?jd_risk_token_id\s*?=\s*["`'](\S*?)["`'];?/)?.[1] || ""
       await jdDailyEgg();
     }
   }
 })()
-    .catch((e) => {
-      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-    })
-    .finally(() => {
-      $.done();
-    })
+  .catch((e) => {
+    $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
+  })
+  .finally(() => {
+    $.done();
+  })
 async function jdDailyEgg() {
   await toDailyHome()
+  if ($.stopNext) return
   await toWithdraw()
   await toGoldExchange();
 }
+
 function toGoldExchange() {
   return new Promise(async resolve => {
-    const body = {
-      "timeSign": 0,
-      "environment": "jrApp",
-      "riskDeviceInfo": "{}"
-    }
-    $.post(taskUrl('toGoldExchange', body), (err, resp, data) => {
+    const body = getBody()
+    $.get(taskUrl('toGoldExchange', body), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -96,12 +94,8 @@ function toGoldExchange() {
 }
 function toWithdraw() {
   return new Promise(async resolve => {
-    const body = {
-      "timeSign": 0,
-      "environment": "jrApp",
-      "riskDeviceInfo": "{}"
-    }
-    $.post(taskUrl('toWithdraw', body), (err, resp, data) => {
+    const body = getBody()
+    $.get(taskUrl('toWithdraw', body), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -132,12 +126,8 @@ function toWithdraw() {
 }
 function toDailyHome() {
   return new Promise(async resolve => {
-    const body = {
-      "timeSign": 0,
-      "environment": "jrApp",
-      "riskDeviceInfo": "{}"
-    }
-    $.post(taskUrl('toDailyHome', body), (err, resp, data) => {
+    const body = getBody(false)
+    $.get(taskUrl('toDailyHome', body), (err, resp, data) => {
       try {
         if (err) {
           console.log(`${JSON.stringify(err)}`)
@@ -146,6 +136,10 @@ function toDailyHome() {
           if (data) {
             // console.log(data)
             data = JSON.parse(data);
+            if (data.resultData.code !== "0000") {
+              $.stopNext = true
+              console.log($.name+"："+data.resultData.msg)
+            }
           } else {
             console.log(`京东服务器返回空数据`)
           }
@@ -202,23 +196,105 @@ function TotalBean() {
     })
   })
 }
+function getBody(withSign = true) {
+  const riskDeviceInfo = JSON.stringify({
+    eid: $.eid,
+    fp: $.fp,
+    token: $.token
+  })
+  const signData = {
+    channelLv: "yxjh",
+    environment: "jrApp",
+    riskDeviceInfo,
+    shareUuid: "uuid",
+  }
+  if (!withSign) {
+    return {
+      ...signData,
+      timeSign: Math.random(),
+    }
+  }
+  $.aar = new window.AAR()
+  const nonce = $.aar.nonce()
+  const signature = $.aar.sign(JSON.stringify(signData), nonce)
+  return {
+    ...signData,
+    timeSign: Math.random(),
+    nonce,
+    signature,
+  }
+}
+
 function taskUrl(function_id, body) {
   return {
-    url: `${JD_API_HOST}/${function_id}`,
-    body: `reqData=${encodeURIComponent(JSON.stringify(body))}`,
+    url: `${JD_API_HOST}/${function_id}?reqData=${JSON.stringify(body)}`,
     headers: {
       'Accept' : `application/json`,
-      'Origin' : `https://uua.jr.jd.com`,
+      'Origin' : `https://active.jd.com`,
       'Accept-Encoding' : `gzip, deflate, br`,
       'Cookie' : cookie,
       'Content-Type' : `application/x-www-form-urlencoded;charset=UTF-8`,
       'Host' : `ms.jr.jd.com`,
       'Connection' : `keep-alive`,
       'User-Agent' : $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-      'Referer' : `https://uua.jr.jd.com/uc-fe-wxgrowing/moneytree/index`,
+      'Referer' : dailyEggUrl,
       'Accept-Language' : `zh-cn`
     }
   }
+}
+function getClientData(fakerBody) {
+  return new Promise(resolve => {
+    const options = {
+      url: `https://gia.jd.com/fcf.html?a=${fakerBody.a}`,
+      body: `d=${fakerBody.d}`,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1")
+      }
+    }
+    $.post(options, async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`\n${JSON.stringify(arguments)}: API查询请求失败 ‼️‼️`)
+          throw new Error(err);
+        } else {
+          if (data.indexOf("*_*") > 0) {
+            data = data.split("*_*", 2);
+            data = JSON.parse(data[1]).eid;
+          } else {
+            console.log(`京东api返回数据为空，请检查自身原因`)
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve(data || "");
+      }
+    })
+  })
+}
+function downloadUrl(url) {
+  return new Promise(resolve => {
+    const options = {
+      url, "timeout": 10000, followRedirect: false, headers: {
+        'User-Agent': $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      }
+    };
+    $.get(options, async (err, resp, data) => {
+      let res = ""
+      try {
+        if (err) {
+          console.log(`⚠️网络请求失败`);
+        } else {
+          res = data;
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(res);
+      }
+    })
+  })
 }
 function jsonParse(str) {
   if (typeof str == "string") {
