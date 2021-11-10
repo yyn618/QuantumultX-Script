@@ -2,9 +2,12 @@
 by ccwav,20210821
 30 8,22 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_bean_change_new.js, tag=京豆变动通知 新, img-url=https://ghproxy.com/https://raw.githubusercontent.com/sngxpro/QuanX/master/pic/lxk0301.png, enabled=true
 */
+/*
+cron "30 10,22 * * *" jd_bean_change.js, tag:资产变化强化版by-ccwav
+*/
 
-
-const $ = new Env('京豆变动通知');
+//更新by ccwav,20210821
+const $ = new Env('京东资产变动通知');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const JXUserAgent =  $.isNode() ? (process.env.JX_USER_AGENT ? process.env.JX_USER_AGENT : ``):``;
 //Node.js用户请在jdCookie.js处填写京东ck;
