@@ -2,12 +2,38 @@
 by ningmeng 20210606
 0 1,21 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_star_shop.js, tag=明星小店, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 */
+/*
+* author:star
+* */
+/*
+明星小店(星店长)
+助力逻辑：每个ck随机获取一个明星，然后会先内部助力，然后再助力内置助力码
+抽奖：是否中奖没判断，需自行查看
+更新时间：2021-06-06
+脚本兼容: QuantumultX, Surge,Loon, JSBox, Node.js
+=================================Quantumultx=========================
+[task_local]
+#明星小店
+0 1,21 * * * jd_star_shop.js, tag=明星小店, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+
+=================================Loon===================================
+[Script]
+cron "0 1,21 * * *" script-path=jd_star_shop.js,tag=明星小店
+
+===================================Surge================================
+明星小店 = type=cron,cronexp="0 1,21 * * *",wake-system=1,timeout=3600,script-path=jd_star_shop.js
+
+====================================小火箭=============================
+明星小店 = type=cron,script-path=jd_star_shop.js, cronexpr="0 1,21 * * *", timeout=3600, enable=true
+ */
 
 const $ = new Env('明星小店');
 const notify = $.isNode() ? require('./sendNotify') : '';
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 $.inviteCodeList = [];
 $.authorCodeList = [
+  'rQI0TkBIzVwHI4fxBQnt6v0doiabNQfNdJglrUVhOP0','Rcl-dpjMZKyZUzie7lg4ow','lqU3wfq2eBw8N6pRbRBGHg','xsK-EVpDVVszF0j95pGD6g','ujizzb0mcJlnHxWODghdng','WWrct3DS6bVAZi_bxreGMIjWj0dbM-h3TRi8V-tidUU','GjWZjC07q0sWv-yzz5wp7A', 'hwm7S-8XHxl5Mpx4rzdPiBOa77Iohk-EgLxyNxi_FdE','3utidIhY2dRDe2mK6T_5G7yh_gGf1xD4vLB_05gZbw4',"0HZjTH3-lWv0qE6mCTvxas01pClGraCVZ1R-ECaEopk","oJ0Rt_cD3HfbYHOD03zHx7fs6lLGnz46irJmHUlaHaA","q27OvSQ2l66rl_t3LlXiVC9P7ql72fjBn2SatEF21DI","bPpQ7CNQkW423nK1kAq46Q","_k4tqw3KlELJH9XxQO5CrA", 'XkpuXLAvubVHX1_5cgppVA','GYv6SLEM1HE774Oiszj3hJbzz_B9k-Nh-4lrWMylsG8',"ryxvI98ll30Z-xEjQ0ZJI_Ka5LFc42WG0se5j1ybSU0","Y6Ruk4dN_x80II8Z4Awn8A","TIKBjQZhOnpCSlNhNxmP-Q","ipJvkexxbJL697gYl2ARdFVE8g4_QnmLbVGQyfXqejo","cEeoaZymvpPvgZsoyrl4BE49ZX_imzxmCrvKHer5LjY", 'nhIeMSk2UO5fhA0PGLTw3j151Q5TP8LOnxNdkyUCmMk','OB_OCfnuZze9If-n96DCsXt8Zdz3_0X0y2IZLo_V_n4', "BAHTiQ8Nq3G3G6pNnwGeQC3trj2aBNyqM3hYs1n4-fY","3g0oim_8GwLqjbT_zh4cvG_DjGwx8dpU2ncgE1MHr6c","9GuvyBEGOaOt8OBOtCW0OQ","22M7P1iwXb2UxYtcZDrmnqcPeQbAwO5HLvg51tB6qpk","A_4ku8sHjGxvkUgxP3_i_Q","mwS23EsQnjj-mViVqYPlFgtPhKsisKarv3GKZKC0n38","WxUkszrzV_sgvHgfjeOazA","qXBK2YHoFjuNubhbXrXn2g","uY2YOhgwbc2OUUXS0antEQ","q9Ywm-xZ14F1DXfV5I51OQ","fbgxyM40fG86ZcA7DLJjNw","6JiDdfsOOnrfPKGPcWR4RQ","UBIG8bGwOdw6ctKJ1Rrbmg_nv42Am9DJrcdJYIjZqzk","MGBsMlJDZt9HqrRvsyqCiw","IJdg-7-cC16Ml7on84Wgsg",
+  'r3yIDGE86HSsdtyFlrPHJHu_0mNpX_AnBREYO-c3BFY', 'Mve7TKmP8UKnC9IULuBrQHzgY54j_0U5BLm5Ox6aigY',
 ];
 let cookiesArr = [];
 let uniqueIdList = [
