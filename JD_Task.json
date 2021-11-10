@@ -2,7 +2,7 @@
     "name":"Xining JD_Task",
     "description":"https://github.com/yyn618/QuantumultX-Script/tree/main/Task/JD",
     "task":[ 
-        "55 23 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_unsubscribe.js, tag=取关京东店铺和商品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
+"55 23 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_unsubscribe.js, tag=取关京东店铺和商品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "0 7,19 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_speed_sign.js, tag=京东极速版签到（40min）, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "10 0,22 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_speed_redpocke.js, tag=京东极速版红包, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png", 
 "10 0 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_shop.js, tag=进店领豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_shop.png",
@@ -38,13 +38,10 @@
 "30 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_cfd_loop.js, tag=京喜财富岛热气球, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png",
 "5 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_cfd_mooncake.js, tag=京喜财富岛合成月饼, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png",
 "0 0,6-23 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_cfd.js, tag=京喜财富岛, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png",
-"
-"#smiek2121
 "18 0,1,9,14,18 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_wealth_island_help.js, tag=财富大陆互助, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "18 0-23/2 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_wealth_island.js, tag=财富大陆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "17 10 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_ddworld.js, tag=东东世界, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "21 9 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_MMdou.js, tag=MM领京豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
-"
 "12 0-23/6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_pigPet.js, tag=京东金融养猪猪, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdyz.png",
 "10 0,20 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_necklace.js, tag=点点券, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "0 0-23/4 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_cash.js, tag=签到领现金, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
