@@ -56,13 +56,23 @@
 
 > 仅保留个人自用任务脚本，需要其他脚本可自行前往作者主页
 
-- Chuhe：京东任务脚本。
-- Faker：京东任务脚本。
-- NobyDa：京东多合一签到。
-- Sunert：微博钱包签到。
-- Yichahucha - 蚂蚁森林、钉钉打卡。
-- blackmatrix7 - 中国联通天天抽奖、什么值得买签到/任务、饿了么签到/任务。
-- Chavyleung - 电信营业厅签到、美团红包签到、美团外卖签到、v2ex签到。
+京东类任务脚本（已搬运至本地仓库，🔗链接为原地址）：
+- NobyDa：京东多合一
+- [ZCY01](https://github.com/ZCY01/daily_scripts/tree/main/jd)：[京东价保](https://github.com/ZCY01/daily_scripts/blob/main/jd/jd_priceProtect.js)
+- [hyzaw](https://www.notion.so/task-1a80bc2c08944d4ba3ba1b7ae1675f65)：[京东直播](https://github.com/hyzaw/scripts/blob/main/jd_live.js)
+- [yangtingxiao](https://github.com/yangtingxiao/QuantumultX/tree/master/scripts/jd)：[抽奖机](https://github.com/yangtingxiao/QuantumultX/blob/master/scripts/jd/jd_lotteryMachine.js)
+- [ningmeng](https://github.com/panghu999/ningmeng)：[京享值PK](https://github.com/qqsdff/panghu/blob/master/jd_pk.js)、[京喜签到](https://github.com/qqsdff/jd_scripts/blob/master/jd_jxsign.js)
+- [chuhe](https://github.com/ChuheGit/1/tree/main/Script/jd_scripts)：[签到领现金](https://github.com/ChuheGit/1/blob/main/Script/jd_scripts/jd_cash.js)、[养猪猪](https://github.com/ChuheGit/1/blob/main/Script/jd_scripts/jd_pigPet.js)、[点点券](https://github.com/ChuheGit/1/blob/main/Script/jd_scripts/jd_necklace.js)、[赚京豆](https://github.com/qqsdff/jd_scripts/blob/master/jd_syj.js)
+- [smiek2121](https://github.com/smiek2121/scripts)：[MM领京豆](https://github.com/smiek2121/scripts/blob/master/gua_MMdou.js)、[东东世界](https://github.com/smiek2121/scripts/blob/master/gua_ddworld.js)、[财富大陆](https://github.com/smiek2121/scripts/blob/master/gua_wealth_island.js)、[财富大陆互助](https://github.com/smiek2121/scripts/blob/master/gua_wealth_island_help.js)
+- [faker](https://github.com/shufflewzc/faker2)：[京喜财富岛](https://github.com/shufflewzc/faker2/blob/main/jd_cfd.js)、[京喜财富岛热气球](https://github.com/shufflewzc/faker2/blob/main/jd_cfd_loop.js)、[京喜财富岛合成月饼](https://github.com/shufflewzc/faker2/blob/main/jd_cfd_mooncake.js)、[东东超市](https://github.com/shufflewzc/faker2/blob/main/jd_superMarket.js)、[京东快递](https://github.com/shufflewzc/faker2/blob/main/jd_kd.js)、[京豆变动通知](https://github.com/shufflewzc/faker2/blob/main/jd_bean_change.js)、[京喜牧场](https://github.com/shufflewzc/faker2/blob/main/jd_jxmc.js)
+- lxk0301：[京豆额外奖励](https://github.com/qqsdff/jd_scripts/blob/master/jd_bean_home.js)、[东东超市换奖品](https://github.com/qqsdff/jd_scripts/blob/master/jd_blueCoin.js)、[摇京豆](https://github.com/qqsdff/jd_scripts/blob/master/jd_club_lottery.js)、[删除优惠券](https://github.com/qqsdff/jd_scripts/blob/master/jd_delCoupon.js)、[跳跳乐瓜分京豆](https://github.com/qqsdff/jd_scripts/blob/master/jd_jump.js)、[摇钱树](https://github.com/qqsdff/jd_scripts/blob/master/jd_moneyTree.js)、[京东全民开红包](https://github.com/qqsdff/jd_scripts/blob/master/jd_redPacket.js)、[天天加速](https://github.com/qqsdff/jd_scripts/blob/master/jd_speed.js)
+- [JDHelloWorld](https://github.com/JDHelloWorld/jd_scripts)：[京东汽车](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_car.js)、[京东汽车兑换](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_car_exchange.js)、[京喜工厂](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_dreamFactory.js)、[京喜工厂助力](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_dreamFactory_help.js)、[东东农场](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_fruit.js)、[金榜创造营](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_gold_creator.js)、[健康社区](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_health.js)、[健康社区收能量](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_health_collect.js)、[东东工厂](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_jdfactory.js)、[京东赚赚](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_jdzz.js)、[领金贴](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_jin_tie.js)、[京喜农场](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_jxnc.js)、[幸运大转盘](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_market_lottery.js)、[秒秒币](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_ms.js)、[京东手机狂欢城](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_carnivalcity.js)、[省钱大赢家之翻翻乐](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_big_winner.js)、[东东萌宠](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_pet.js)、[种豆得豆](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_plantBean.js)、[进店领豆](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_shop.js)、[极速版红包](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_speed_redpocke.js)、[极速版签到](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_speed_sign.js)、[取关店铺/商品](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_unsubscribe.js)
+
+其他任务脚本：
+- Sunert：微博钱包签到
+- Yichahucha - 蚂蚁森林、钉钉打卡
+- blackmatrix7 - 中国联通天天抽奖、什么值得买签到/任务、饿了么签到/任务
+- Chavyleung - 电信营业厅签到、美团红包签到、美团外卖签到、v2ex签到
 
 <br>
 
@@ -76,6 +86,7 @@
 - Sunert <https://gitee.com/Sunert/Scripts/raw/master/Task/sunert.boxjs.json>
 - blackmatrix7 <https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/script/boxjs.json>
 - chavyleung <https://github.com/chavyleung/scripts/blob/master/chavy.box.js>
+- lxk0301<https://raw.githubusercontent.com/ChuheGit/1/main/Script/jd.boxjs.json>
 
 <br>
 
@@ -100,6 +111,10 @@
 [lhie1](https://github.com/lhie1/Rules/tree/master/QuantumultX)
 
 [faker](https://github.com/shufflewzc/faker2)
+
+[JDHelloWorld](https://github.com/JDHelloWorld/jd_scripts)
+
+[smiek2121](https://github.com/smiek2121/scripts)
 
 [chavyleung](https://github.com/chavyleung/scripts)
 
