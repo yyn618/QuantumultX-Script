@@ -68,6 +68,16 @@
 - lxk0301：[京豆额外奖励](https://github.com/qqsdff/jd_scripts/blob/master/jd_bean_home.js)、[东东超市换奖品](https://github.com/qqsdff/jd_scripts/blob/master/jd_blueCoin.js)、[摇京豆](https://github.com/qqsdff/jd_scripts/blob/master/jd_club_lottery.js)、[删除优惠券](https://github.com/qqsdff/jd_scripts/blob/master/jd_delCoupon.js)、[跳跳乐瓜分京豆](https://github.com/qqsdff/jd_scripts/blob/master/jd_jump.js)、[摇钱树](https://github.com/qqsdff/jd_scripts/blob/master/jd_moneyTree.js)、[京东全民开红包](https://github.com/qqsdff/jd_scripts/blob/master/jd_redPacket.js)、[天天加速](https://github.com/qqsdff/jd_scripts/blob/master/jd_speed.js)
 - [JDHelloWorld](https://github.com/JDHelloWorld/jd_scripts)：[京东汽车](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_car.js)、[京东汽车兑换](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_car_exchange.js)、[京喜工厂](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_dreamFactory.js)、[京喜工厂助力](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_dreamFactory_help.js)、[东东农场](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_fruit.js)、[金榜创造营](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_gold_creator.js)、[健康社区](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_health.js)、[健康社区收能量](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_health_collect.js)、[东东工厂](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_jdfactory.js)、[京东赚赚](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_jdzz.js)、[领金贴](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_jin_tie.js)、[京喜农场](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_jxnc.js)、[幸运大转盘](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_market_lottery.js)、[秒秒币](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_ms.js)、[京东手机狂欢城](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_carnivalcity.js)、[省钱大赢家之翻翻乐](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_big_winner.js)、[东东萌宠](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_pet.js)、[种豆得豆](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_plantBean.js)、[进店领豆](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_shop.js)、[极速版红包](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_speed_redpocke.js)、[极速版签到](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_speed_sign.js)、[取关店铺/商品](https://github.com/JDHelloWorld/jd_scripts/blob/main/jd_unsubscribe.js)
 
+##### 使用方法：
+
+添加京东任务仓库：https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/JD_Task.json
+
+![image](https://user-images.githubusercontent.com/31948921/141168012-5256d021-5f8a-4336-b68f-8fc194b3e919.png)
+
+
+
+---
+
 其他任务脚本：
 - Sunert：微博钱包签到
 - Yichahucha - 蚂蚁森林、钉钉打卡
