@@ -1,8 +1,7 @@
 /*
 by faker 20211102
 
-0 0,6-23 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_cfd.js, tag=京喜财富岛, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
-
+30 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_cfd_loop.js, tag=京喜财富岛热气球, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
 活动入口：京喜APP-我的-京喜财富岛
 */
 !function (t, r) { "object" == typeof exports ? module.exports = exports = r() : "function" == typeof define && define.amd ? define([], r) : t.CryptoJS = r() }(this, function () {
