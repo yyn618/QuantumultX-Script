@@ -70,7 +70,7 @@
 
 ##### 使用方法：
 
-添加京东任务仓库：https://raw.githubusercontent.com/ChuheGit/1/main/Surge/Module/Cookie.sgmodule
+添加京东任务仓库：https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/JD_Task.json
 
 ![image](https://user-images.githubusercontent.com/31948921/141168012-5256d021-5f8a-4336-b68f-8fc194b3e919.png)
 
