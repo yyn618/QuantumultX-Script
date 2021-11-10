@@ -9,12 +9,7 @@ feedCount:自定义 每次喂养数量; 等级只和喂养次数有关，与数�
 默认每次投喂10个，积累狗粮，然后去玩聚宝盆赌
 
 活动入口：京东APP我的-更多工具-宠汪汪
-*//**
- 更新时间：2021-09-30
- cron: 0 0-23/2 * * *
- export feedNum=80
- export JD_JOY_teamLevel=2
- */
+*/
 
 const $ = new Env("宠汪汪二代目")
 console.log('\n====================Hello World====================\n')
