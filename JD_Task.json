@@ -50,7 +50,7 @@
 "10-20/5 12 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_live.js, tag=京东直播, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "11 7 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_priceProtect.js, tag=京东价保, img-url=https://raw.githubusercontent.com/ZCY01/img/master/pricev1.png",
 "31 2,8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_mf.js, tag=京东魔方, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
-"23 7,9 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_xsljd.js, tag=限时抢京豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
+"23 7,9 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_xsqjd.js, tag=限时抢京豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "10 7 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_lotteryMachine.js, tag=抽奖机, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jdlottery.png",
     ]
 }
