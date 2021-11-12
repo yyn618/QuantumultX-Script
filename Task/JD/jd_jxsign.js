@@ -1,6 +1,6 @@
 /*
 by lxk0301 20211110
-20 1,8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_jxsign.js, tag=京喜签到, mg-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
+20 1,8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_jxsign.js, tag=京喜签到, mg-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png, enabled=true
 
 活动入口：京喜APP-我的-京喜签到
 */
