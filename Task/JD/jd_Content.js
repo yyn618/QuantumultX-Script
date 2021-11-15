@@ -1,20 +1,18 @@
 /*
-by faker 20211114
-27 8,18 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_Content.js, tag=内容鉴赏官, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+by smiek2121 20211113
+27 8,18 * 9-12 * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_Content.js, tag=内容鉴赏官, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 活动时间：20210901-20211231
 地址：https://prodev.m.jd.com/mall/active/2y1S9xVYdTud2VmFqhHbkcoAYhJT/index.html
 */
 
-const $ = new Env('内容鉴赏官');
-const notify = $.isNode() ? require('./sendNotify') : '';
-//Node.js用户请在jdCookie.js处填写京东ck;
+const $ = new Env('寻找内容鉴赏官');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
+
+const notify = $.isNode() ? require('./sendNotify') : '';
 //IOS等用户直接用NobyDa的jd cookie
-let cookiesArr = [], cookie = '', message;
-let isLoginInfo = {}
-$.shareCodes = []
+let cookiesArr = [],
+    cookie = '';
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -23,480 +21,278 @@ if ($.isNode()) {
 } else {
   cookiesArr = [$.getdata('CookieJD'), $.getdata('CookieJD2'), ...jsonParse($.getdata('CookiesJD') || "[]").map(item => item.cookie)].filter(item => !!item);
 }
-const JD_API_HOST = 'https://api.m.jd.com/';
-let agid = [], pageId, encodeActivityId, paginationFlrs, activityId
-let allMessage = '';
+allMessage = ""
+message = ""
+let UA = ''
+$.hotFlag = false
+$.outFlag = 0
+$.temp = [];
+$.list = []
+$.canHelpInfo = {};
 !(async () => {
   if (!cookiesArr[0]) {
-    $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
+    $.msg($.name, '【提示】请先获取cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/', {
+      "open-url": "https://bean.m.jd.com/"
+    });
     return;
   }
-  // let res = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/connoisseur.json')
-  // if (!res) {
-  //   $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/connoisseur.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
-  //   await $.wait(1000)
-  //   res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/connoisseur.json')
-  // }
+  console.log(`入口:\nhttps://prodev.m.jd.com/mall/active/2VyRHGE7jM1igBJcrjoB6ak1JJWV/index.html`)
   for (let i = 0; i < cookiesArr.length; i++) {
-    if (cookiesArr[i]) {
-      cookie = cookiesArr[i];
+    cookie = cookiesArr[i];
+    if (cookie) {
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = i + 1;
-      $.isLogin = true;
+      message = ""
+      $.bean = 0
+      $.hotFlag = false
+      await getUA()
       $.nickName = '';
-      message = '';
-      await TotalBean();
-      isLoginInfo[$.UserName] = $.isLogin
-      console.log(`\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
-      if (!$.isLogin) {
-        $.msg($.name, `【提示】cookie已失效`, `京东账号${$.index} ${$.nickName || $.UserName}\n请重新登录获取\nhttps://bean.m.jd.com/bean/signIndex.action`, {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
-
-        if ($.isNode()) {
-          await notify.sendNotify(`${$.name}cookie已失效 - ${$.UserName}`, `京东账号${$.index} ${$.UserName}\n请重新登录获取cookie`);
+      console.log(`\n\n******开始【京东账号${$.index}】${$.nickName || $.UserName}*********\n`);
+      await run();
+    }
+    if($.outFlag != 0) break
+  }
+  $.projectId = "rfhKVBToUL4RGuaEo7NtSEUw2bA"
+  $.assignmentId = "3PX8SPeYoQMgo1aJBZYVkeC7QzD3"
+  $.helpType = 2
+  $.type = 2
+  if($.temp.length > 0){
+    for (let i = 0; i < cookiesArr.length && true; i++) {
+      if (cookiesArr[i]) {
+        cookie = cookiesArr[i];
+        $.canHelp = true;//能否助力
+        $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
+        $.canHelp = $.canHelpInfo[$.UserName];
+        if ((cookiesArr && cookiesArr.length >= 1) && $.canHelp) {
+          for (let t in $.temp) {
+            let item = $.temp[t]
+            if (!item) continue;
+            console.log(`\n${$.UserName} 去助力 ${item}`);
+            $.toHelp = ''
+            $.itemId = item
+            await takePostRequest('help');
+            await $.wait(parseInt(Math.random() * 1000 + 1000, 10))
+            if($.toHelpMsg.indexOf('可助力') > -1){
+              await takePostRequest('interactive_done');
+              await $.wait(parseInt(Math.random() * 1000 + 1000, 10))
+            }else if($.toHelpMsg.indexOf('任务已完成') > -1){
+              $.temp[t] = ''
+              break;
+            }else if($.toHelpMsg.indexOf('最多助力') > -1 || $.toHelpMsg.indexOf('火爆') > -1) break;
+          }
         }
-        continue
       }
-      await jdConnoisseur()
     }
   }
-  // $.shareCodes = [...new Set([...$.shareCodes, ...(res || [])])]
-  // for (let i = 0; i < cookiesArr.length; i++) {
-  //   if (cookiesArr[i]) {
-  //     cookie = cookiesArr[i];
-  //     $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
-  //     if (!isLoginInfo[$.UserName]) continue
-  //     $.canHelp = true
-  //     if ($.shareCodes && $.shareCodes.length) {
-  //       console.log(`\n开始互助\n`)
-  //       for (let j = 0; j < $.shareCodes.length && $.canHelp; j++) {
-  //         console.log(`账号${$.UserName} 去助力 ${$.shareCodes[j].use} 的助力码 ${$.shareCodes[j].code}`)
-  //         if ($.UserName === $.shareCodes[j].use) {
-  //           console.log(`助力失败：不能助力自己`)
-  //           continue
-  //         }
-  //         $.delcode = false
-  //         await getTaskInfo("2", $.projectCode, $.taskCode, "2", $.shareCodes[j].code)
-  //         await $.wait(2000)
-  //         if ($.delcode) {
-  //           $.shareCodes.splice(j, 1)
-  //           j--
-  //           continue
-  //         }
-  //       }
-  //     } else {
-  //       break
-  //     }
-  //   }
-  // }
+  if(allMessage){
+    $.msg($.name, ``, `${allMessage}`);
+    if ($.isNode() && $.sendMessage){
+      await notify.sendNotify(`${$.name}`, `${allMessage}`);
+    }
+  }
 })()
-    .catch((e) => {
-      $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
-    })
-    .finally(() => {
-      $.done();
-    })
+    .catch((e) => $.logErr(e))
+    .finally(() => $.done())
 
-async function jdConnoisseur() {
-  await getActiveInfo()
-  await $.wait(2000)
-  await getshareCode()
-}
 
-async function getActiveInfo(url = 'https://prodev.m.jd.com/mall/active/2y1S9xVYdTud2VmFqhHbkcoAYhJT/index.html') {
-  let options = {
-    url,
-    headers: {
-      "Host": "prodev.m.jd.com",
-      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-      "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Cookie": cookie
-    }
-  }
-  return new Promise(async resolve => {
-    $.get(options, async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(JSON.stringify(err))
-          console.log(`${$.name} getActiveInfo API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = data && data.match(/window\.performance.mark\(e\)}}\((.*)\);<\/script>/)[1]
-            data = JSON.parse(data)
-            pageId = data.activityInfo.pageId
-            encodeActivityId = data.activityInfo.encodeActivityId
-            paginationFlrs = data.paginationFlrs
-            activityId = data.activityInfo.activityId
-            for (let key of Object.keys(data.codeFloors)) {
-              let vo = data.codeFloors[key]
-              if (vo.boardParams && vo.boardParams.taskCode === "2CCbSBbVWkFZzRDngs4F6q3YZ62o") {
-                agid = []
-                agid.push(vo.materialParams.advIdVideo[0].advGrpId)
-                console.log(`去做【${vo.boardParams.titleText}】`)
-                await getTaskInfo("11", vo.boardParams.projectCode, vo.boardParams.taskCode)
-              } else if (vo.boardParams && vo.boardParams.taskCode === "4JHmm8nEpyuKgc3z9wkGArXDtEdh") {
-                agid = []
-                agid.push(vo.materialParams.advIdKOC[0].advGrpId)
-                console.log(`去做【${vo.boardParams.titleText}】`)
-                await getTaskInfo("10", vo.boardParams.projectCode, vo.boardParams.taskCode)
-              } else if (vo.boardParams && vo.boardParams.taskCode === "2PbAu1BAT79RxrM5V7c2VAPUQDSd") {
-                agid = []
-                agid.push(vo.materialParams.advIdKOC[0].advGrpId)
-                agid.push(vo.materialParams.advIdVideo[0].advGrpId)
-                console.log(`去做【${vo.boardParams.btnText}】`)
-                await getTaskInfo("5", vo.boardParams.projectCode, vo.boardParams.taskCode)
-                await $.wait(2000)
-              } else if (vo.boardParams && (vo.boardParams.taskCode === "485y3NEBCKGJg6L4brNg6PHhuM9d" || vo.boardParams.taskCode === "2bpKT3LMaEjaGyVQRr2dR8zzc9UU")) {
-                console.log(`去做【${vo.boardParams.titleText}】`)
-                await getTaskInfo("9", vo.boardParams.projectCode, vo.boardParams.taskCode)
-                await $.wait(2000)
-              } else if (vo.boardParams && (vo.boardParams.taskCode === "3dw9N5yB18RaN9T1p5dKHLrWrsX" || vo.boardParams.taskCode === "CtXTxzkh4ExFCrGf8si3ePxGnPy" || vo.boardParams.taskCode === "Hys8nCmAaqKmv1G3Y3a5LJEk36Y" || vo.boardParams.taskCode === "2wPBGptSUXNs3fxqgAtrV5MwkYEa")) {
-                await getTaskInfo("1", vo.boardParams.projectCode, vo.boardParams.taskCode)
-                await $.wait(2000)
-              }
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
+async function run() {
+  try {
+    $.earn = 0
+    $.signTask = ''
+    $.total = ''
+    await takePostRequest('interactive_rewardInfo');
+    $.helpType = 1
+    $.itemId = ''
+    await takePostRequest('help');
+    $.canHelpInfo[$.UserName] = true;
+    if($.total === '' || $.hasRisk){
+      let msg = '账号异常'
+      if($.hasRisk){
+        $.canHelpInfo[$.UserName] = false;
+        msg = '账号火爆'
       }
-    })
-  })
-}
-async function getTaskInfo(type, projectId, assignmentId, helpType = '1', itemId = '') {
-  let body = {"type":type,"projectId":projectId,"assignmentId":assignmentId,"doneHide":false}
-  if (assignmentId === $.taskCode) body['itemId'] = itemId, body['helpType'] = helpType
-  if (assignmentId === "2CCbSBbVWkFZzRDngs4F6q3YZ62o") body['agid'] = agid
-  return new Promise(async resolve => {
-    $.post(taskUrl('interactive_info', body), async (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} getTaskInfo API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = JSON.parse(data)
-            if (assignmentId === "2CCbSBbVWkFZzRDngs4F6q3YZ62o") {
-              if (data.code === "0" && data.data) {
-                if (data.data[0]) {
-                  if (data.data[0].status !== "2") {
-                    let num = 0;
-                    for (let i = data.data[0].viewedNum; i < data.data[0].viewNum; i++) {
-                      let vo = data.data[0].videoDtoPageResult.list[num]
-                      await interactive_done(type, data.data[0].projectId, data.data[0].assignmentId, vo.articleDto.jump.id, 1)
-                      await $.wait((data.data[0].waitDuration * 1000) || 2000)
-                      num++
+      console.log(msg)
+      allMessage += `【京东账号${$.index}】${$.nickName || $.UserName}\n${msg}\n`
+      return
+    }
+    if($.list.length == 0){
+      await getList1()
+      await getList2()
+    }
+    for(let i in $.list || []){
+      if($.list[i]){
+        $.type = $.list[i].type
+        $.projectId = $.list[i].projectId
+        $.assignmentId = $.list[i].assignmentId
+        $.Task = ''
+        $.infoBody = {"type":$.type+"","projectId":$.projectId+"","assignmentId":$.assignmentId+"","doneHide":false}
+        if($.list[i].agId) $.infoBody["agId"] = $.list[i].agId
+        if($.list[i].helpType) $.infoBody["helpType"] = $.list[i].helpType+""
+        if($.list[i].itemId) $.infoBody["itemId"] = $.list[i].itemId
+        $.infoBody = $.toStr($.infoBody,$.infoBody)
+        await takePostRequest('interactive_info');
+        // console.log($.Task)
+        if(Object.getOwnPropertyNames($.Task).length > 0){
+          if($.type == 5) console.log(`签到天数${$.Task.current || 0}/${$.Task.signDays || 0}`)
+          $.projectId = $.Task.projectId
+          $.assignmentId = $.Task.assignmentId
+          $.itemId = $.Task.itemId || ''
+          let title = $.Task.title || $.list[i].name || ""
+          if($.Task.status+"" === "0"){
+            console.log(`${title}`)
+            await $.wait(parseInt(Math.random() * 1000 + 1000, 10))
+            if($.Task.waitDuration > 0){
+              await takePostRequest('interactive_accept');
+              await $.wait(parseInt($.Task.waitDuration > 0 && $.Task.waitDuration*1000, 10) || 10000)
+              UA = 'JD4iPhone/167863 (iPhone; iOS 13.1.2; Scale/2.00)'
+              await takePostRequest('qryViewkitCallbackResult');
+              UA = ''
+            }else{
+              if($.type == 9 || $.type == 1 || $.type == 5){
+                if($.type == 9) UA = 'JD4iPhone/167863 (iPhone; iOS 13.1.2; Scale/2.00)'
+                await takePostRequest('interactive_done');
+                if($.type == 9){
+                  UA = ''
+                  await $.wait(parseInt(Math.random() * 1000 + 1000, 10))
+                  await takePostRequest('interactive_reward');
+                }
+              }else{
+                let num1 = 0
+                let num2 = 0
+                if($.type == 11){
+                  num1 = $.Task.viewNum - $.Task.viewedNum
+                  num2 = $.Task.evaluateNum - $.Task.evaluatedNum
+                }else if($.type == 10){
+                  num1 = $.Task.likeTotalCount - $.Task.likeAlreadyCount
+                  num2 = $.Task.watchTotalCount - $.Task.watchAlreadyCount
+                }
+                if(num1 > 0 || num2 > 0){
+                  let list = []
+                  if($.type == 10){
+                    $.agid = $.list[i].advIdKOC
+                    await takePostRequest('aha_card_list');
+                    await $.wait(parseInt(Math.random() * 1000 + 2000, 10))
+                    list = $.cardList
+                  }else{
+                    list = $.Task.videoDtoPageResult.list
+                  }
+                  for(let i of list || []){
+                    if(num1 <= 0 && num2 <= 0) break
+                    $.contentId = ''
+                    if(i.adMaterialDto){
+                      $.contentId = i.adMaterialDto.id
+                    }else if(i.id){
+                      $.contentId = i.id
                     }
-                    num = 0;
-                    for (let i = data.data[0].evaluatedNum; i < data.data[0].evaluateNum; i++) {
-                      let vo = data.data[0].videoDtoPageResult.list[num]
-                      await interactive_done(type, data.data[0].projectId, data.data[0].assignmentId, vo.articleDto.jump.id, 2)
-                      await $.wait((data.data[0].waitDuration * 1000) || 2000)
-                      num++
+                    if(!$.contentId) continue
+                    if(num1 > 0){
+                      $.actionType = 1
+                      await takePostRequest('interactive_done');
+                      await $.wait(parseInt(Math.random() * 1000 + 2000, 10))
                     }
-                    await interactive_reward(type, data.data[0].projectId, data.data[0].assignmentId)
-                  } else {
-                    console.log(`任务已完成`)
-                  }
-                } else {
-                  console.log(`无当前任务`)
-                }
-              } else {
-                console.log(data.message)
-              }
-            } else if (assignmentId === "4JHmm8nEpyuKgc3z9wkGArXDtEdh") {
-              if (data.code === "0" && data.data) {
-                if (data.data[0]) {
-                  if (data.data[0].status !== "2") {
-                    let res = await aha_card_list(type, data.data[0].projectId, data.data[0].assignmentId)
-                    let num = 0;
-                    for (let i = data.data[0].watchAlreadyCount; i < data.data[0].watchTotalCount; i++) {
-                      let vo = res.data.cardList[num]
-                      await interactive_done(type, data.data[0].projectId, data.data[0].assignmentId, vo.id, 1)
-                      await $.wait((data.data[0].waitDuration * 1000) || 2000)
-                      num++
+                    if(num2 > 0){
+                      $.actionType = 2
+                      await takePostRequest('interactive_done');
+                      await $.wait(parseInt(Math.random() * 1000 + 2000, 10))
                     }
-                    num = 0;
-                    for (let i = data.data[0].likeAlreadyCount; i < data.data[0].likeTotalCount; i++) {
-                      let vo = res.data.cardList[num]
-                      await interactive_done(type, data.data[0].projectId, data.data[0].assignmentId, vo.id, 2)
-                      await $.wait((data.data[0].waitDuration * 1000) || 2000)
-                      num++
-                    }
-                    await interactive_reward(type, data.data[0].projectId, data.data[0].assignmentId)
-                  } else {
-                    console.log(`任务已完成`)
+                    num1--
+                    num2--
                   }
-                } else {
-                  console.log(`无当前任务`)
-                }
-              } else {
-                console.log(data.message)
-              }
-            } else if (assignmentId === "2PbAu1BAT79RxrM5V7c2VAPUQDSd" || assignmentId === "3dw9N5yB18RaN9T1p5dKHLrWrsX" || assignmentId === "2gWnJADG8JXMpp1WXiNHgSy4xUSv" || assignmentId === "CtXTxzkh4ExFCrGf8si3ePxGnPy" || assignmentId === "2wPBGptSUXNs3fxqgAtrV5MwkYEa" || assignmentId === "u4eyHS91t3fV6HRyBCg9k5NTUid" || assignmentId === "4WHSXEqKZeGQZeP9SvqxePQpBkpS" || assignmentId === "4PCdWdiKNwRw1PmLaFzJmTqRBq4v" || assignmentId === "4JcMwRmGJUXptBYzAfUDkKTtgeUs" || assignmentId === "4ZmB6jqmJjRWPWxjuq22Uf17CuUQ" || assignmentId === "QGPPJyQPhSBJ57QcU8PdMwWwwCR" || assignmentId === "tBLY4YL4LkBwWj9KKq9BevHHvcP" || assignmentId === "4UFHr2rSLyS912riDWih6B8gMXkf") {
-              if (assignmentId !== "2PbAu1BAT79RxrM5V7c2VAPUQDSd") console.log(`去做【${data.data[0].title}】`)
-              if (data.code === "0" && data.data) {
-                if (data.data[0]) {
-                  if (data.data[0].status !== "2") {
-                    await interactive_done(type, data.data[0].projectId, data.data[0].assignmentId, data.data[0].itemId)
-                    await $.wait((data.data[0].waitDuration * 1000) || 2000)
-                  } else {
-                    console.log(assignmentId === "2PbAu1BAT79RxrM5V7c2VAPUQDSd" ? `今日已签到` : `任务已完成`)
-                  }
-                } else {
-                  console.log(`无当前任务`)
-                }
-              } else {
-                console.log(data.message)
-              }
-            } else if (assignmentId === "485y3NEBCKGJg6L4brNg6PHhuM9d" || assignmentId === "2bpKT3LMaEjaGyVQRr2dR8zzc9UU") {
-              if (data.code === "0" && data.data) {
-                if (data.data[0].status !== "2") {
-                  await sign_interactive_done(type, data.data[0].projectId, data.data[0].assignmentId)
-                  await $.wait((data.data[0].waitDuration * 1000) || 2000)
-                  await interactive_reward(type, data.data[0].projectId, data.data[0].assignmentId)
-                } else {
-                  console.log(`任务已完成`)
-                }
-              } else {
-                console.log(data.message)
-              }
-            } else if (assignmentId === "Hys8nCmAaqKmv1G3Y3a5LJEk36Y") {
-              if (data.code === "0" && data.data) {
-                console.log(`去做【${data.data[0].title}】`)
-                if (data.data[0].status !== "2") {
-                  await interactive_accept(type, data.data[0].projectId, data.data[0].assignmentId, data.data[0].itemId)
-                  await $.wait((data.data[0].waitDuration * 1000) || 2000)
-                  await qryViewkitCallbackResult(data.data[0].projectId, data.data[0].assignmentId, data.data[0].itemId)
-                } else {
-                  console.log(`任务已完成`)
-                }
-              } else {
-                console.log(data.message)
-              }
-            } else if (assignmentId === $.taskCode) {
-              if (helpType === '1') {
-                if (data.code === "0" && data.data) {
-                  if (data.data[0].status !== "2") {
-                    console.log(`【京东账号${$.index}（${$.UserName}）的内容鉴赏官好友互助码】${data.data[0].itemId}`)
-                    $.shareCodes.push({
-                      'use': $.UserName,
-                      'code': data.data[0].itemId
-                    })
-                  }
-                } else {
-                  console.log(data.message)
-                }
-              } else if (helpType === '2') {
-                if (data.code === "0" && data.data) {
-                  if (data.data[0].code === "0") {
-                    await interactive_done(type, $.projectCode, $.taskCode, itemId)
-                  } else if (data.data[0].code === "103") {
-                    $.canHelp = false
-                    console.log(`助力失败：无助力次数`)
-                  } else if (data.data[0].code === "102") {
-                    console.log(`助力失败：${data.data[0].msg}`)
-                  } else if (data.data[0].code === "106") {
-                    $.delcode = true
-                    console.log(`助力失败：您的好友已完成任务`)
-                  } else {
-                    console.log(JSON.stringify(data))
-                  }
-                } else {
-                  console.log(data.message)
+                  await $.wait(parseInt(Math.random() * 1000 + 1000, 10))
+                  await takePostRequest('interactive_reward');
                 }
               }
             }
+            await $.wait(parseInt(Math.random() * 1000 + 2000, 10))
+
+          }else if($.Task.status+"" === "1" && $.type == 9){
+            await takePostRequest('interactive_reward');
+            await $.wait(parseInt(Math.random() * 1000 + 2000, 10))
+          }else if($.Task.status+"" === "2"){
+            console.log(`${title} 已完成`)
+          }else{
+            console.log(`${title}-未知 ${$.Task.status}`)
           }
+        }else{
+          console.log(`${$.list[i].name || $.assignmentId} 获取失败`)
         }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
       }
-    })
-  })
-}
-function interactive_done(type, projectId, assignmentId, itemId, actionType = '') {
-  let body = {"projectId":projectId,"assignmentId":assignmentId,"itemId":itemId,"type":type}
-  if (type === "5" || type === "2") body['agid'] = agid
-  if (type === "10" || type === "11") delete body["itemId"], body["actionType"] = actionType, body["contentId"] = itemId
-  return new Promise(resolve => {
-    $.post(taskUrl('interactive_done', body), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} interactive_done API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = JSON.parse(data)
-            if (type === "2") {
-              if (data.code === "0" && data.busiCode === "0") {
-                console.log(data.data.msg)
-                if (!data.data.success) $.canHelp = false
-              } else {
-                console.log(data.message)
-              }
-            } else {
-              if (data.code === "0" && data.busiCode === "0") {
-                if (type !== "10" && type !== "11") console.log(data.data.rewardMsg)
-              } else {
-                console.log(data.message)
-              }
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-async function sign_interactive_done(type, projectId, assignmentId) {
-  let functionId = 'interactive_done'
-  let body = JSON.stringify({"assignmentId":assignmentId,"type":type,"projectId":projectId})
-  let uuid = randomString(40)
-  let sign = await getSign(functionId, body, uuid)
-  let url = `${JD_API_HOST}client.action?functionId=${functionId}&client=apple&clientVersion=10.1.0&uuid=${uuid}&${sign}`
-  return new Promise(resolve => {
-    $.post(taskPostUrl(url, body), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} sign_interactive_done API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = JSON.parse(data)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-function interactive_reward(type, projectId, assignmentId) {
-  return new Promise(resolve => {
-    $.post(taskUrl('interactive_reward', {"projectId":projectId,"assignmentId":assignmentId,"type":type}), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} interactive_reward API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = JSON.parse(data)
-            if (data.code === "0" && data.busiCode === "0") {
-              console.log(data.data.rewardMsg)
-            } else {
-              console.log(data.message)
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-function interactive_accept(type, projectId, assignmentId, itemId) {
-  return new Promise(resolve => {
-    $.post(taskUrl('interactive_accept', {"projectId":projectId,"assignmentId":assignmentId,"type":type,"itemId":itemId}), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} interactive_accept API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = JSON.parse(data)
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-async function qryViewkitCallbackResult(encryptProjectId, encryptAssignmentId, itemId) {
-  let functionId = 'qryViewkitCallbackResult'
-  let body = JSON.stringify({"dataSource":"babelInteractive","method":"customDoInteractiveAssignmentForBabel","reqParams":`{\"itemId\":\"${itemId}\",\"encryptProjectId\":\"${encryptProjectId}\",\"encryptAssignmentId\":\"${encryptAssignmentId}\"}`})
-  let uuid = randomString(40)
-  let sign = await getSign(functionId, body, uuid)
-  let url = `${JD_API_HOST}client.action?functionId=${functionId}&client=apple&clientVersion=10.1.0&uuid=${uuid}&${sign}`
-  return new Promise(resolve => {
-    $.post(taskPostUrl(url, body), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} qryViewkitCallbackResult API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = JSON.parse(data)
-            if (data.code === "0" || data.msg === "query success!") {
-              console.log(`恭喜获得2个京豆`)
-            }
-          }
-        }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-async function getshareCode() {
-  let sid = randomString(40)
-  let body = JSON.stringify({"activityId":encodeActivityId,"pageNum":"-1","innerAnchor":"","innerExtId":"","hideTopFoot":"","innerLinkBase64":"","innerIndex":"0","focus":"","forceTop":"","addressId":"4091160336","posLng":"","posLat":"","homeLng":"","homeLat":"","gps_area":"","headId":"","headArea":"","warehouseId":"","dcId":"","babelChannel":"ttt1","mitemAddrId":"","geo":{"lng":"","lat":""},"flt":"","jda":"168871293.1632069151379637759921.1632069151.1634449233.1634455108.187","topNavStyle":"","url":`https://prodev.m.jd.com/mall/active/${encodeActivityId}/index.html?babelChannel=ttt1&tttparams=s1AJNojeyJsbmciOiIxMTcuMDA2NTYzIiwiZ0xhdCI6IjQwLjE4OTkzIiwibGF0IjoiNDAuMTgxOTM0IiwiZ0xuZyI6IjExNy4wMTAwNzEiLCJncHNfYXJlYSI6IjFfMjk1M181NDA0NF8wIiwidW5fYXJlYSI6IjFfMjk1M181NDA0NF8wIn70%3D&lng=&lat=&sid=${sid}&un_area=`,"fullUrl":`https://prodev.m.jd.com/mall/active/${encodeActivityId}/index.html?babelChannel=ttt1&tttparams=s1AJNojeyJsbmciOiIxMTcuMDA2NTYzIiwiZ0xhdCI6IjQwLjE4OTkzIiwibGF0IjoiNDAuMTgxOTM0IiwiZ0xuZyI6IjExNy4wMTAwNzEiLCJncHNfYXJlYSI6IjFfMjk1M181NDA0NF8wIiwidW5fYXJlYSI6IjFfMjk1M181NDA0NF8wIn70%3D&lng=&lat=&sid=${sid}&un_area=`,"autoSkipEmptyPage":false,"paginationParam":"2","paginationFlrs":paginationFlrs,"transParam":`{\"bsessionId\":\"\",\"babelChannel\":\"ttt1\",\"actId\":\"${activityId}\",\"enActId\":\"${encodeActivityId}\",\"pageId\":\"${pageId}\",\"encryptCouponFlag\":\"1\",\"sc\":\"apple\",\"scv\":\"10.1.6\",\"requestChannel\":\"h5\",\"jdAtHomePage\":\"0\"}`,"siteClient":"apple","siteClientVersion":"10.1.6","matProExt":{"unpl":"V2_ZzNtbUEAR0B1CUBWeRkLVWIGF1pKX0IXIVpOUi8eWFJkBxpbclRCFnUURlVnGVgUZwMZWEtcRxBFCEZkexhdBmIKFFxGXnMlfQAoVDYZMgYJAF8QD2dAFUUJdlR8G1wBZwAXXENRRhFxCU9QextZBWQzIl1EZ3MldDhHZHopF2tmThJaQFdHFXYNR1V9HFgBZgoWXUBSQxZFCXZX|V2_ZzNtbRYEREB1X0VTfU5fAGIHEwhLUUZCfVgVAX0aCVJlVhUPclRCFnUURlVnGV0UZwYZXkVcRxdFCEJkexhdBW8KF1xGVnMlfGZFV38dXwFiBREzQlZCe0ULRmR6KVUBYgoSXEUHShJ2X0YDLx8PADQKFwhAB0MSIg4RAy5LCwBhARpcFwNzJXwJdlJ5EV0DYAEiCBwIFVAlUB0MK0YKWD8DIlxyVnMURV4oVHoYXQVmAxRcRBpKEXABRlV8SVUCZFQSChZREBAmAUMBeUlcAjAFRQoXBRQQcwpOVS5NbARXAw%3d%3d"},"userInterest":{"whiteNote":"0_0_0","payment":"0_0_0","plusNew":"0_0_0","plusRenew":"0_0_0"}})
-  let options = {
-    url: `${JD_API_HOST}?client=wh5&clientVersion=1.0.0&functionId=qryH5BabelFloors`,
-    body: `body=${encodeURIComponent(body)}&screen=1242*2208&sid=${sid}&uuid=${randomString(40)}&area=&osVersion=15.0.1&d_model=iphone11,2`,
-    headers: {
-      "Host": "api.m.jd.com",
-      "Accept": "*/*",
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Origin": "https://prodev.m.jd.com",
-      "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-      "Referer": "https://prodev.m.jd.com/",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Cookie": cookie
     }
+    await takePostRequest('interactive_rewardInfo');
+    if($.earn > 0) {
+      allMessage += `【京东账号${$.index}】${$.nickName || $.UserName}\n本次运行获得${$.earn}京豆，共计${$.total}京豆\n`
+      $.sendMessage = true
+    }
+    await $.wait(parseInt(Math.random() * 1000 + 3000, 10))
+  } catch (e) {
+    console.log(e)
   }
+}
+
+async function takePostRequest(type) {
+  let url = '';
+  let body = ``;
+  switch (type) {
+    case 'interactive_rewardInfo':
+      url = `https://api.m.jd.com/interactive_rewardInfo?functionId=interactive_rewardInfo&appid=contenth5_common&body={"encryptProjectPoolId":"DhFbbuoB65uR33ntszFgY8raqPQ"}&client=wh5`;
+      body = ``;
+      break;
+    case 'interactive_info':
+      url = `https://api.m.jd.com/interactive_info?functionId=interactive_info&appid=contenth5_common&body=[${$.infoBody}]&client=wh5`;
+      body = ``;
+      break;
+    case 'help':
+      url = `https://api.m.jd.com/interactive_info?functionId=interactive_info&appid=contenth5_common&body=[{"type":"2","projectId":"rfhKVBToUL4RGuaEo7NtSEUw2bA","assignmentId":"3PX8SPeYoQMgo1aJBZYVkeC7QzD3","doneHide":false,"helpType":"${$.helpType}","itemId":"${$.itemId}"}]&client=wh5`;
+      body = ``;
+      break;
+    case 'interactive_done':
+    case 'interactive_accept':
+    case 'aha_card_list':
+      let bodys = ''
+      if($.type == 5) bodys = ',"agid":["05804754","05822013"]'
+      if($.type == 2) bodys = ',"agid":["05804754","05804886"]'
+      if($.type == 11 || $.type == 10){
+        bodys = `,"actionType":${$.actionType},"contentId":"${$.contentId}"`
+        if(type == "aha_card_list"){
+          bodys = `,"agid":${$.toStr($.agid,$.agid)},"firstStart":1`
+        }
+        url = `https://api.m.jd.com/${type}?functionId=${type}&appid=contenth5_common&body={"projectId":"${$.projectId}","assignmentId":"${$.assignmentId}","type":"${$.type}"${bodys}}&client=wh5`;
+      }else{
+        url = `https://api.m.jd.com/${type}?functionId=${type}&appid=contenth5_common&body={"projectId":"${$.projectId}","assignmentId":"${$.assignmentId}","type":"${$.type}","itemId":"${$.itemId}"${bodys}}&client=wh5`;
+      }
+      body = ``;
+      if($.type == 9){
+        url = `https://api.m.jd.com/client.action?functionId=interactive_done`;
+        body = `body=%7B%22assignmentId%22%3A%22485y3NEBCKGJg6L4brNg6PHhuM9d%22%2C%22type%22%3A%229%22%2C%22projectId%22%3A%22rfhKVBToUL4RGuaEo7NtSEUw2bA%22%7D&uuid=f3ee276edabfc0ad98ff9c35743ec729b3eb30af&client=apple&clientVersion=10.1.4&st=1636278455578&sv=111&sign=76313d9e2b4682324e557cbd0e9e3500`;
+      }
+      break;
+    case 'interactive_reward':
+      url = `https://api.m.jd.com/interactive_reward?functionId=interactive_reward&appid=contenth5_common&body={"projectId":"${$.projectId}","assignmentId":"${$.assignmentId}","type":"${$.type}"}&client=wh5`;
+      body = ``;
+      break;
+    case 'qryViewkitCallbackResult':
+      url = `https://api.m.jd.com/client.action?functionId=qryViewkitCallbackResult`;
+      let signBody = `{"dataSource":"babelInteractive","method":"customDoInteractiveAssignmentForBabel","reqParams":"{\\"itemId\\":\\"${$.itemId}\\",\\"encryptProjectId\\":\\"${$.projectId}\\",\\"encryptAssignmentId\\":\\"${$.assignmentId}\\"}"}`
+      let sign = await jdSign('qryViewkitCallbackResult', signBody)
+      if(!sign) return
+      body = sign;
+      break;
+    default:
+      console.log(`错误${type}`);
+  }
+  let myRequest = getPostRequest(url, body);
   return new Promise(async resolve => {
-    $.post(options, async (err, resp, data) => {
+    $.post(myRequest, (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} getshareCode API请求失败，请检查网路重试`)
+          console.log(`${$.toStr(err,err)}`)
+          console.log(`${type} API请求失败，请检查网路重试`)
         } else {
-          if (data) {
-            data = JSON.parse(data)
-            for (let key of Object.keys(data.floorList)) {
-              let vo = data.floorList[key]
-              if (vo.boardParams && (vo.boardParams.taskCode === "2gWnJADG8JXMpp1WXiNHgSy4xUSv" || vo.boardParams.taskCode === "2wPBGptSUXNs3fxqgAtrV5MwkYEa" || vo.boardParams.taskCode === "u4eyHS91t3fV6HRyBCg9k5NTUid" || vo.boardParams.taskCode === "Hys8nCmAaqKmv1G3Y3a5LJEk36Y" || vo.boardParams.taskCode === "4WHSXEqKZeGQZeP9SvqxePQpBkpS" || vo.boardParams.taskCode === "4PCdWdiKNwRw1PmLaFzJmTqRBq4v" || vo.boardParams.taskCode === "4JcMwRmGJUXptBYzAfUDkKTtgeUs" || vo.boardParams.taskCode === "4ZmB6jqmJjRWPWxjuq22Uf17CuUQ" || vo.boardParams.taskCode === "QGPPJyQPhSBJ57QcU8PdMwWwwCR" || vo.boardParams.taskCode === "tBLY4YL4LkBwWj9KKq9BevHHvcP" || vo.boardParams.taskCode === "4UFHr2rSLyS912riDWih6B8gMXkf" || vo.boardParams.taskCode === "3dw9N5yB18RaN9T1p5dKHLrWrsX")) {
-                await getTaskInfo("1", vo.boardParams.projectCode, vo.boardParams.taskCode)
-                await $.wait(2000)
-              } else if (vo.boardParams && vo.boardParams.taskCode === "3PX8SPeYoQMgo1aJBZYVkeC7QzD3") {
-                $.projectCode = vo.boardParams.projectCode
-                $.taskCode = vo.boardParams.taskCode
-              }
-            }
-            // await getTaskInfo("2", $.projectCode, $.taskCode)
-          }
+          dealReturn(type, data);
         }
       } catch (e) {
-        $.logErr(e, resp)
+        // console.log(data);
+        console.log(e, resp)
       } finally {
         resolve();
       }
@@ -504,212 +300,239 @@ async function getshareCode() {
   })
 }
 
-function aha_card_list(type, projectId, assignmentId) {
-  return new Promise(resolve => {
-    $.post(taskUrl('browse_aha_task/aha_card_list', {"type":type,"projectId":projectId,"assignmentId":assignmentId,"agid":agid,"firstStart":1}), (err, resp, data) => {
-      try {
-        if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} aha_card_list API请求失败，请检查网路重试`)
-        } else {
-          if (data) {
-            data = JSON.parse(data)
+async function dealReturn(type, data) {
+  let res = ''
+  try {
+    res = JSON.parse(data);
+  } catch (e) {
+    console.log(`执行任务异常`);
+    // console.log(data);
+    $.runFalag = false;
+  }
+  switch (type) {
+    case 'interactive_rewardInfo':
+      if (res.data && res.success && res.code+"" === "0" && res.data) {
+        if($.total === ''){
+          $.total = parseInt(res.data,10) > 0 && parseInt(res.data,10) || 0
+          console.log(`当前累计${res.data || 0}京豆`)
+        }else{
+          $.earn = parseInt(res.data,10) > 0 && (parseInt(res.data,10) - $.total) || 0
+          $.total = parseInt(res.data,10) > 0 && parseInt(res.data,10) || 0
+          console.log(`本次运行获得${$.earn}京豆`)
+        }
+      } else {
+        console.log(`${type}-> ${data}`);
+      }
+      break;
+    case 'interactive_info':
+      if (res.data && res.success && res.code+"" === "0" && res.data) {
+        $.Task = res.data[0] || res.data || {};
+      } else {
+        console.log(`${type}-> ${data}`);
+      }
+      break;
+    case 'aha_card_list':
+      if (res.data && res.success && res.code+"" === "0" && res.data) {
+        $.cardList = res.data.cardList || [];
+      } else {
+        console.log(`${type}-> ${data}`);
+      }
+      break;
+    case 'interactive_done':
+    case 'interactive_reward':
+      if (res.data && res.success && res.code+"" === "0" && res.data) {
+        console.log(`${res.data && (res.data.rewardMsg || res.data.msg || '') || data}`)
+      } else {
+        console.log(`${type}-> ${data}`);
+      }
+      break;
+    case 'help':
+      if (res.data && res.success && res.code+"" === "0" && res.data) {
+        let arr = res.data[0] || res.data || {}
+        $.hasRisk = arr.hasRisk || false
+        if($.helpType == 1 && !arr.hasRisk){
+          console.log(`助力码:${arr.itemId || '获取失败'}`)
+          if(arr.itemId){
+            $.temp.push(arr.itemId);
+          }
+        }else if($.helpType == 2){
+          $.toHelp = arr.remainAssistTime
+          if(arr.hasRisk){
+            $.toHelpMsg = '账号火爆'
+            console.log($.toHelpMsg)
+          }else{
+            $.toHelpMsg = arr.msg
+            console.log(arr.msg)
           }
         }
-      } catch (e) {
-        $.logErr(e, resp)
-      } finally {
-        resolve(data);
+      } else {
+        console.log(`${type}-> ${data}`);
       }
-    })
-  })
+      break;
+    default:
+      console.log(`${type}-> ${data}`);
+  }
 }
 
-function showMsg() {
+function getList1() {
   return new Promise(resolve => {
-    if (!jdNotify) {
-      $.msg($.name, '', `${message}`);
-    } else {
-      $.log(`京东账号${$.index}${$.nickName}\n${message}`);
-    }
-    resolve()
-  })
-}
-
-function taskUrl(functionId, body) {
-  if (functionId === "interactive_info") {
-    body = `[${encodeURIComponent(JSON.stringify(body))}]`
-  } else {
-    body = encodeURIComponent(JSON.stringify(body))
-  }
-  let function_Id;
-  if (functionId.indexOf("/") > -1) {
-    function_Id = functionId.split("/")[1]
-  } else {
-    function_Id = functionId
-  }
-  return {
-    url: `${JD_API_HOST}${functionId}?functionId=${function_Id}&appid=contenth5_common&body=${body}&client=wh5`,
-    headers: {
-      "Host": "api.m.jd.com",
-      "Accept": "application/json, text/plain, */*",
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Origin": "https://prodev.m.jd.com",
-      "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-      "Accept-Encoding": "gzip, deflate, br",
-      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-      "Referer": "https://prodev.m.jd.com/",
-      "Cookie": cookie
-    }
-  }
-}
-function taskPostUrl(url, body) {
-  return {
-    url,
-    body: `body=${encodeURIComponent(body)}`,
-    headers: {
-      "Host": "api.m.jd.com",
-      "Content-Type": "application/x-www-form-urlencoded",
-      "j-e-c": "",
-      "Accept": "*/*",
-      "j-e-h": "",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Accept-Language": "zh-Hans-CN;q=1",
-      "User-Agent": "JD4iPhone/167841 (iPhone; iOS; Scale/3.00)",
-      "Referer": "",
-      "Cookie": cookie
-    }
-  }
-}
-function getSign(functionid, body, uuid) {
-  return new Promise(async resolve => {
-    let data = {
-      "functionId":functionid,
-      "body":body,
-      "uuid":uuid,
-      "client":"apple",
-      "clientVersion":"10.1.0"
-    }
-    let HostArr = ['jdsign.cf', 'signer.nz.lu']
-    let Host = HostArr[Math.floor((Math.random() * HostArr.length))]
-    let options = {
-      url: `https://cdn.nz.lu/ddo`,
-      body: JSON.stringify(data),
+    let opts = {
+      url:`https://prodev.m.jd.com/mall/active/2y1S9xVYdTud2VmFqhHbkcoAYhJT/index.html`,
+      followRedirect:false,
       headers: {
-        Host,
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
+        "User-Agent": $.UA,
       },
-      timeout: 30 * 1000
+      timeout:30000
     }
-    $.post(options, (err, resp, data) => {
+    $.get(opts, async(err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
-          console.log(`${$.name} getSign API请求失败，请检查网路重试`)
+          console.log(`${$.toStr(err)}`)
+          console.log(`${$.name} list API请求失败，请检查网路重试`)
         } else {
-
+          let list = data.match(/window.__react_data__ = (.+)/) && data.match(/window.__react_data__ = (.+)/)[1] || {}
+          list = $.toObj(list,list)
+          if(Object.getOwnPropertyNames(list).length > 0){
+            for(let i of list.activityData.floorList || []){
+              if(i.boardParams && i.boardParams.projectCode && i.boardParams.taskCode){
+                let type = 1
+                if(i.boardParams.taskCode == "2PbAu1BAT79RxrM5V7c2VAPUQDSd") type = 5
+                if(i.boardParams.taskCode == "2CCbSBbVWkFZzRDngs4F6q3YZ62o") type = 11
+                if(i.boardParams.taskCode == "4JHmm8nEpyuKgc3z9wkGArXDtEdh") type = 10
+                if(i.boardParams.taskCode == "2gWnJADG8JXMpp1WXiNHgSy4xUSv") type = 1
+                if(i.boardParams.taskCode == "485y3NEBCKGJg6L4brNg6PHhuM9d") type = 9
+                let arr = {"type":type,"projectId":i.boardParams.projectCode,"assignmentId":i.boardParams.taskCode,"doneHide":false,"name":""}
+                if(i.boardParams.titleText || i.boardParams.btnText) arr["name"] = i.boardParams.titleText || i.boardParams.btnText || ''
+                if(type == 11 && i.materialParams.advIdVideo[0].advGrpId) arr["agId"] = [i.materialParams.advIdVideo[0].advGrpId]
+                if(type == 10 && i.materialParams.advIdKOC[0].advGrpId) arr["advIdKOC"] = [i.materialParams.advIdKOC[0].advGrpId]
+                $.list.push(arr)
+              }
+            }
+          }
         }
       } catch (e) {
         $.logErr(e, resp)
       } finally {
-        resolve(data);
+        resolve();
       }
     })
   })
+}
+function getList2() {
+  return new Promise(resolve => {
+    let opts = {
+      url:`https://api.m.jd.com/?client=wh5&clientVersion=1.0.0&functionId=qryH5BabelFloors`,
+      followRedirect:false,
+      headers: {
+        "User-Agent": $.UA,
+        "Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Cookie":cookie
+      },
+      body:`body=%7B%22activityId%22%3A%222y1S9xVYdTud2VmFqhHbkcoAYhJT%22%2C%22pageNum%22%3A%22-1%22%2C%22innerAnchor%22%3A%22%22%2C%22innerExtId%22%3A%22%22%2C%22hideTopFoot%22%3A%22%22%2C%22innerLinkBase64%22%3A%22%22%2C%22innerIndex%22%3A%220%22%2C%22focus%22%3A%22%22%2C%22forceTop%22%3A%22%22%2C%22addressId%22%3A%222862725865%22%2C%22posLng%22%3A%22118.1423%22%2C%22posLat%22%3A%2224.49335%22%2C%22homeLng%22%3A%22%22%2C%22homeLat%22%3A%22%22%2C%22gps_area%22%3A%22%22%2C%22headId%22%3A%22%22%2C%22headArea%22%3A%22%22%2C%22warehouseId%22%3A%22%22%2C%22jxppGroupid%22%3A%22%22%2C%22jxppFreshman%22%3A%22%22%2C%22dcId%22%3A%22%22%2C%22babelChannel%22%3A%22%22%2C%22mitemAddrId%22%3A%2216_1315_3486_59648%22%2C%22geo%22%3A%7B%22lng%22%3A%22%22%2C%22lat%22%3A%22%22%7D%2C%22flt%22%3A%22%22%2C%22jda%22%3A%22209449046.1636152208102536431468.1636152208.1636725651.1636803628.46%22%2C%22topNavStyle%22%3A%22%22%2C%22url%22%3A%22https%3A%2F%2Fprodev.m.jd.com%2Fmall%2Factive%2F2y1S9xVYdTud2VmFqhHbkcoAYhJT%2Findex.html%22%2C%22fullUrl%22%3A%22https%3A%2F%2Fprodev.m.jd.com%2Fmall%2Factive%2F2y1S9xVYdTud2VmFqhHbkcoAYhJT%2Findex.html%22%2C%22autoSkipEmptyPage%22%3Afalse%2C%22paginationParam%22%3A%222%22%2C%22paginationFlrs%22%3A%22%5B%5B62955735%2C62955736%2C62955737%2C62955739%2C64833751%2C62957541%2C62957542%2C64770387%2C64770388%2C64770389%2C67005145%2C65097981%2C65692910%2C63379295%5D%2C%5B64770390%2C63024171%2C63025563%2C62991890%2C62957544%2C64580300%2C63632301%2C63632302%2C68346160%2C68371270%2C63025564%2C68373413%2C68391609%2C68383144%2C68391610%2C68383145%2C68391611%2C68383147%2C68391612%2C68383149%2C68391613%2C68391614%2C68383150%2C68383151%2C68383152%5D%5D%22%2C%22transParam%22%3A%22%7B%5C%22bsessionId%5C%22%3A%5C%22707f6e8a-5e7b-4961-91b2-353a6c29ecd5%5C%22%2C%5C%22babelChannel%5C%22%3A%5C%22%5C%22%2C%5C%22actId%5C%22%3A%5C%2201043576%5C%22%2C%5C%22enActId%5C%22%3A%5C%222y1S9xVYdTud2VmFqhHbkcoAYhJT%5C%22%2C%5C%22pageId%5C%22%3A%5C%222929776%5C%22%2C%5C%22encryptCouponFlag%5C%22%3A%5C%221%5C%22%2C%5C%22sc%5C%22%3A%5C%22apple%5C%22%2C%5C%22scv%5C%22%3A%5C%2210.2.2%5C%22%2C%5C%22requestChannel%5C%22%3A%5C%22h5%5C%22%2C%5C%22jdAtHomePage%5C%22%3A%5C%220%5C%22%2C%5C%22utmFlag%5C%22%3A%5C%220%5C%22%7D%22%2C%22siteClient%22%3A%22apple%22%2C%22siteClientVersion%22%3A%2210.2.2%22%2C%22_mkjdcn%22%3A%22a4d2e2d9062d32b9361020528efedb8a%22%2C%22matProExt%22%3A%7B%22unpl%22%3A%22V2_ZzNtbUtVEEchCUAHeh8LAmJTEw1KX0FHJl0VAHIYW1Y3UUFbclRCFnUURlRnGV8UZwsZXkVcQxFFCEZkeBhcBmIKF1lLUHMlfQAoVzYZMgYJAF8QD2dAFUUJdlR8G1sFYwARXEtXQhZxCkFReRlZAm4zIl1EZ3MldDhHZHopF2tmThJaQFBDEXYLR117GF8BZQQXX0JSRBxFCXZX%22%7D%2C%22userInterest%22%3A%7B%22whiteNote%22%3A%220_0_0%22%2C%22payment%22%3A%220_0_0%22%2C%22plusNew%22%3A%220_0_0%22%2C%22plusRenew%22%3A%220_0_0%22%7D%7D&screen=1242*2208&sid=&uuid=${$.UUID}&area=16_1315_3486_59648&osVersion=13.1.2&d_model=iphone8%2C1`,
+      timeout:30000
+    }
+    $.post(opts, async(err, resp, data) => {
+      try {
+        if (err) {
+          console.log(`${$.toStr(err)}`)
+          console.log(`${$.name} list API请求失败，请检查网路重试`)
+        } else {
+          // console.log(data)
+          let list = $.toObj(data,data)
+          if(Object.getOwnPropertyNames(list).length > 0){
+            for(let i of list.floorList || []){
+              // console.log(i.boardParams)
+              if(i.boardParams && i.boardParams.projectCode && i.boardParams.taskCode){
+                let type = 1
+                if(i.boardParams.taskCode == "3PX8SPeYoQMgo1aJBZYVkeC7QzD3"){
+                  continue
+                  type = 2
+                }
+                let arr = {"type":type,"projectId":i.boardParams.projectCode,"assignmentId":i.boardParams.taskCode,"doneHide":false,"name":""}
+                if(i.boardParams.titleText || i.boardParams.btnText) arr["name"] = i.boardParams.titleText || i.boardParams.btnText || ''
+                if(type == 2 && i.materialParams.advIdVideo[0].advGrpId){
+                  arr["helpType"] = "1"
+                  arr["itemId"] = ""
+                }
+                $.list.push(arr)
+              }
+            }
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve();
+      }
+    })
+  })
+}
+function jdSign(fn,body) {
+  return new Promise((resolve) => {
+    let url = {
+      url: `https://jd.smiek.tk/jdsign_21092132`,
+      body:`{"fn":"${fn}","body":${body}}`,
+      followRedirect:false,
+      headers: {
+        'Accept':'*/*',
+        "accept-encoding": "gzip, deflate, br",
+        'Content-Type': 'application/json',
+      },
+      timeout:30000
+    }
+    $.post(url, async (err, resp, data) => {
+      try {
+        let res = $.toObj(data,data)
+        if(res && typeof res === 'object'){
+          if(res.code && res.code == 200 && res.msg == "ok" && res.data){
+            let sign = ''
+            if(res.data.sign) sign = res.data.sign || ''
+            resolve(sign)
+          }else{
+            console.log(data)
+          }
+        }else{
+          console.log(data)
+        }
+      } catch (e) {
+        $.logErr(e, resp);
+      } finally {
+        resolve('')
+      }
+    })
+  })
+}
+function getPostRequest(url,body) {
+  let headers =  {
+    "Accept": "application/json",
+    "Accept-Language": "zh-cn",
+    "Accept-Encoding": "gzip, deflate, br",
+    "Connection": "keep-alive",
+    "Content-Type": "application/x-www-form-urlencoded",
+    'Cookie': `${cookie}`,
+    "Origin": `https://prodev.m.jd.com`,
+    "X-Requested-With": "XMLHttpRequest",
+    "Referer": `https://prodev.m.jd.com/mall/active/2y1S9xVYdTud2VmFqhHbkcoAYhJT/index.html`,
+    "User-Agent": `${UA || $.UA}` ,
+  }
+  // console.log(headers)
+  // console.log(headers.Cookie)
+  return  {url: url, method: `POST`, headers: headers, body: body};
+}
+
+async function getUA(){
+  $.UUID = randomString(40)
+  $.UA = `jdapp;iPhone;10.2.2;13.1.2;${$.UUID};M/5.0;network/wifi;ADID/;model/iPhone8,1;addressid/2308460611;appBuild/167863;jdSupportDarkMode/0;Mozilla/5.0 (iPhone; CPU iPhone OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1;`
 }
 function randomString(e) {
   e = e || 32;
   let t = "abcdef0123456789", a = t.length, n = "";
-  for (let i = 0; i < e; i++)
+  for (i = 0; i < e; i++)
     n += t.charAt(Math.floor(Math.random() * a));
   return n
 }
 
-function getAuthorShareCode(url) {
-  return new Promise(async resolve => {
-    const options = {
-      url: `${url}?${new Date()}`, "timeout": 10000, headers: {
-        "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/87.0.4280.88"
-      }
-    };
-    if ($.isNode() && process.env.TG_PROXY_HOST && process.env.TG_PROXY_PORT) {
-      const tunnel = require("tunnel");
-      const agent = {
-        https: tunnel.httpsOverHttp({
-          proxy: {
-            host: process.env.TG_PROXY_HOST,
-            port: process.env.TG_PROXY_PORT * 1
-          }
-        })
-      }
-      Object.assign(options, { agent })
-    }
-    $.get(options, async (err, resp, data) => {
-      try {
-        resolve(JSON.parse(data))
-      } catch (e) {
-        // $.logErr(e, resp)
-      } finally {
-        resolve();
-      }
-    })
-    await $.wait(10000)
-    resolve();
-  })
-}
-
-function TotalBean() {
-  return new Promise(async resolve => {
-    const options = {
-      url: "https://wq.jd.com/user_new/info/GetJDUserInfoUnion?sceneval=2",
-      headers: {
-        Host: "wq.jd.com",
-        Accept: "*/*",
-        Connection: "keep-alive",
-        Cookie: cookie,
-        "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
-        "Accept-Language": "zh-cn",
-        "Referer": "https://home.m.jd.com/myJd/newhome.action?sceneval=2&ufc=&",
-        "Accept-Encoding": "gzip, deflate, br"
-      }
-    }
-    $.get(options, (err, resp, data) => {
-      try {
-        if (err) {
-          $.logErr(err)
-        } else {
-          if (data) {
-            data = JSON.parse(data);
-            if (data['retcode'] === 1001) {
-              $.isLogin = false; //cookie过期
-              return;
-            }
-            if (data['retcode'] === 0 && data.data && data.data.hasOwnProperty("userInfo")) {
-              $.nickName = data.data.userInfo.baseInfo.nickname;
-            }
-          } else {
-            console.log('京东服务器返回空数据');
-          }
-        }
-      } catch (e) {
-        $.logErr(e)
-      } finally {
-        resolve();
-      }
-    })
-  })
-}
-function safeGet(data) {
-  try {
-    if (typeof JSON.parse(data) == "object") {
-      return true;
-    }
-  } catch (e) {
-    console.log(e);
-    console.log(`京东服务器访问数据为空，请检查自身设备网络情况`);
-    return false;
-  }
-}
 function jsonParse(str) {
   if (typeof str == "string") {
     try {
