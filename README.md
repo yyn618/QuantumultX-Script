@@ -12,13 +12,12 @@
 
 * [QX.conf](https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/QX.conf)为全配置地址。
 * [QX-AD.conf](https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/QX-AD.conf)为去广告专用配置地址。
-* [QX-JS.conf](https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/QX-JS.conf)为脚本专用配置地址。
 
 <br>
 
 ### 使用方法：
 
-1. 点击库中的[QX.conf](https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/QX.conf)，复制真实地址备用。
+1. 选择需要配置[QX.conf](https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/QX.conf)、[QX-AD.conf](https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/QX-AD.conf)，复制地址备用。
 2. QX主界面，点击右下角按钮，下拉点击**配置文件-下载**，将复制的地址粘贴确定。
 3. QX主界面，点击右下角按钮，下拉至**Mitm**，点击**生成证书**。
 4. 继续点击**配置证书**，根据提示安装证书。
@@ -59,7 +58,10 @@
 > 仅保留个人自用任务脚本，需要其他脚本可自行前往作者主页
 
 京东类任务脚本（已搬运至本地仓库，🔗链接为原地址）：
-- NobyDa：京东多合一
+
+🔗脚本仓库地址：[Xining JD_Task](https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/JD_Task.json)
+
+- [NobyDa](https://github.com/NobyDa/Script)：[京东多合一](https://github.com/NobyDa/Script/blob/master/JD-DailyBonus/JD_DailyBonus.js)
 - [ZCY01](https://github.com/ZCY01/daily_scripts/tree/main/jd)：[京东价保](https://github.com/ZCY01/daily_scripts/blob/main/jd/jd_priceProtect.js)
 - [hyzaw](https://www.notion.so/task-1a80bc2c08944d4ba3ba1b7ae1675f65)：[京东直播](https://github.com/hyzaw/scripts/blob/main/jd_live.js)
 - [yangtingxiao](https://github.com/yangtingxiao/QuantumultX/tree/master/scripts/jd)：[抽奖机](https://github.com/yangtingxiao/QuantumultX/blob/master/scripts/jd/jd_lotteryMachine.js)
@@ -81,7 +83,7 @@
 ---
 
 其他任务脚本：
-- Sunert：微博钱包签到
+- Sunert：微博钱包签到、中青看点签到
 - Yichahucha - 蚂蚁森林、钉钉打卡
 - blackmatrix7 - 中国联通天天抽奖、什么值得买签到/任务、饿了么签到/任务
 - Chavyleung - 电信营业厅签到、美团红包签到、美团外卖签到、v2ex签到
@@ -131,6 +133,8 @@
 [chavyleung](https://github.com/chavyleung/scripts)
 
 [Chuhe](https://github.com/ChuheGit/1)
+
+[Sunert](https://gitee.com/Sunert/Scripts/tree/master)
 
 [yichahucha](https://github.com/yichahucha/surge)
 
