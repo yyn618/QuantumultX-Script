@@ -17,7 +17,7 @@ https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Youth/Youth_coo
 
 #中青Body获取
 <br>
-https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Youth/Youth_Read.conf, tag=中青Body获取,  update-interval=172800, opt-parser=true, enabled=False
+https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Youth/Youth_Read.conf, tag=中青Body获取,  update-interval=172800, opt-parser=true, enabled=false
 
 <br>
 
