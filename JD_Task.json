@@ -1,10 +1,7 @@
 {
     "name":"Xining JD_Task",
-    "description":"https://github.com/yyn618/QuantumultX-Script/tree/main/Task/JD",
+    "description":"https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/JD_Task.json",
     "task":[ 
-"*/10 5-23 * * * https://gitee.com/Sunert/Scripts/raw/master/Task/youth.js, tag= 中青签到&转盘宝箱, img-url=https://raw.githubusercontent.com/erdongchanyo/icon/main/taskicon/Youth.png",
-"10 */2 * * * https://gitee.com/Sunert/Scripts/raw/master/Task/Youth_Read.js, tag=中青自动阅读, img-url=https://raw.githubusercontent.com/erdongchanyo/icon/main/taskicon/Youth.png",
-"20 5 10 * * * https://gitee.com/Sunert/Scripts/raw/master/Task/youth_gain.js, tag=中青浏览赚, img-url=https://raw.githubusercontent.com/erdongchanyo/icon/main/taskicon/Youth.png",         
 "55 23 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_unsubscribe.js, tag=取关京东店铺和商品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "0 7,19 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_speed_sign.js, tag=京东极速版签到（40min）, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "10 0,22 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_speed_redpocke.js, tag=京东极速版红包, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png", 
