@@ -83,6 +83,9 @@
 ---
 
 其他任务脚本：
+
+🔗脚本仓库地址：[Xining extra_Task](https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/extra_Task.json)
+
 - Sunert：微博钱包签到、中青看点签到
 - Yichahucha - 蚂蚁森林、钉钉打卡
 - blackmatrix7 - 中国联通天天抽奖、什么值得买签到/任务、饿了么签到/任务
