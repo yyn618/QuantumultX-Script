@@ -9,7 +9,6 @@
 "12 0-23/6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_plantBean.js, tag=种豆得豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdzd.png",
 "15 6-18/6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_pet.js, tag=东东萌宠, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdmc.png",
 "20 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_big_winner.js, tag=省钱大赢家之翻翻乐, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
-"5 0-18/6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_carnivalcity.js, tag=京东手机狂欢城, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "10 7 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_ms.js, tag=京东秒秒币, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_ms.jpg",
 "4 10 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_market_lottery.js, tag=幸运大转盘, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "0 9,12,18 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_jxnc.js, tag=京喜农场, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxnc.png",
