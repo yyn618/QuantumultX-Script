@@ -8,31 +8,6 @@ by JDHelloWorld 20211120
 活动入口：京东APP-游戏与互动-查看更多-京喜工厂
 或者: 京东APP首页搜索 "玩一玩" ,造物工厂即可
 */
-/*
-京东京喜工厂助力
-先了解自己环境怎么添加内部助力码
-助力顺序：内部 -> HW.ts -> 助力池
-
-更新时间：2021-09-14
-
-已支持IOS双京东账号,Node.js支持N个京东账号
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-============Quantumultx===============
-[task_local]
-#京喜工厂助力
-50 * * * * https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_dreamFactory_help.js, tag=京喜工厂助力, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png, enabled=true
-
-================Loon==============
-[Script]
-cron "50 * * * *" script-path=https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_dreamFactory_help.js,tag=京喜工厂助力
-
-===============Surge=================
-京喜工厂助力 = type=cron,cronexp="50 * * * *",wake-system=1,timeout=3600,script-path=https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_dreamFactory_help.js
-
-============小火箭=========
-京喜工厂助力 = type=cron,script-path=https://raw.githubusercontent.com/JDHelloWorld/jd_scripts/main/jd_dreamFactory_help.js, cronexpr="50 * * * *", timeout=3600, enable=true
-
- */
 
 ;!function (a, b) {
   "object" == typeof exports ? module.exports = exports = b() : "function" == typeof define && define.amd ? define([], b) : a.CryptoJS = b()
