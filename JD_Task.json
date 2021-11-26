@@ -19,6 +19,7 @@
 "5-45/20 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_health_collect.js, tag=东东健康社区收能量, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "13 1,6,22 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_health.js, tag=东东健康社区, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "13 1,22 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_gold_creator.js, tag=金榜创造营, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
+"13 6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_gold_sign.js, tag=京东金榜, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jd.png",
 "5 6-18/6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_fruit.js, tag=东东农场, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdnc.png",
 "50 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_dreamFactory_help.js, tag=京喜工厂助力, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png",
 "10 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_dreamFactory.js, tag=京喜工厂, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png",
@@ -52,5 +53,6 @@
 "31 2,8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_mf.js, tag=京东魔方, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "23 7,9 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_xsqjd.js, tag=限时抢京豆, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "10 7 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_lotteryMachine.js, tag=抽奖机, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jdlottery.png",
+"23 8,20 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_superBrand.js, tag=京东特务Z, img-url=https://raw.githubusercontent.com/yangtingxiao/QuantumultX/master/image/jd.png",
     ]
 }
