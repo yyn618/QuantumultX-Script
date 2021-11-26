@@ -5,7 +5,32 @@ by JDHelloWorld 20211017
 活动入口：京东APP-游戏与互动-查看更多-京喜工厂
 或者: 京东APP首页搜索 "玩一玩" ,造物工厂即可
 */
+/*
+京东京喜工厂
+更新时间：2021-6-25
+修复做任务、收集电力出现火爆，不能完成任务，重新计算h5st验证
+参考自 ：https://www.orzlee.com/web-development/2021/03/03/lxk0301-jingdong-signin-scriptjingxi-factory-solves-the-problem-of-unable-to-signin.html
+活动入口：京东APP-游戏与互动-查看更多-京喜工厂
+或者: 京东APP首页搜索 "玩一玩" ,造物工厂即可
 
+已支持IOS双京东账号,Node.js支持N个京东账号
+脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
+============Quantumultx===============
+[task_local]
+#京喜工厂
+10 * * * * jd_dreamFactory.js, tag=京喜工厂, img-url=https://github.com/58xinian/icon/raw/master/jdgc.png, enabled=true
+
+================Loon==============
+[Script]
+cron "10 * * * *" script-path=jd_dreamFactory.js,tag=京喜工厂
+
+===============Surge=================
+京喜工厂 = type=cron,cronexp="10 * * * *",wake-system=1,timeout=3600,script-path=jd_dreamFactory.js
+
+============小火箭=========
+京喜工厂 = type=cron,script-path=jd_dreamFactory.js, cronexpr="10 * * * *", timeout=3600, enable=true
+
+ */
 // prettier-ignore
 ;!function (a, b) {
   "object" == typeof exports ? module.exports = exports = b() : "function" == typeof define && define.amd ? define([], b) : a.CryptoJS = b()
@@ -2201,16 +2226,6 @@ function userInfo() {
               $.productionId = production.productionId;//商品ID
               $.commodityDimId = production.commodityDimId;
               $.encryptPin = data.user.encryptPin;
-              for (let k = 0; k < 5; k++) {
-                try {
-                  await runTimes()
-                  console.log('ok')
-                  break
-                } catch (e) {
-                }
-                await $.wait(Math.floor(Math.random() * 10 + 3) * 1000)
-              }
-
               await GetCommodityDetails();//获取已选购的商品信息
               if (productionStage['productionStageAwardStatus'] === 1) {
                 $.log(`可以开红包了\n`);
@@ -2267,24 +2282,6 @@ function userInfo() {
         $.logErr(e, resp)
       } finally {
         resolve();
-      }
-    })
-  })
-}
-
-function runTimes() {
-  return new Promise((resolve, reject) => {
-    $.get({
-      url: `https://api.jdsharecode.xyz/api/runTimes?activityId=jxfactory&sharecode=${$.encryptPin}`
-    }, (err, resp, data) => {
-      if (err) {
-        console.log('上报失败', err)
-        reject(err)
-      } else {
-        if (data === '1' || data === '0') {
-          console.log('上报成功')
-          resolve()
-        }
       }
     })
   })
