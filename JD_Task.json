@@ -2,6 +2,7 @@
     "name":"Xining JD_Task",
     "description":"https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/JD_Task.json",
     "task":[ 
+"0 9 * * * https://raw.githubusercontent.com/NobyDa/Script/master/JD-DailyBonus/JD_DailyBonus.js, tag=京东, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true",
 "55 23 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_unsubscribe.js, tag=取关京东店铺和商品, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "0 7,19 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_speed_sign.js, tag=京东极速版签到（40min）, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "10 0,22 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_speed_redpocke.js, tag=京东极速版红包, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png", 
