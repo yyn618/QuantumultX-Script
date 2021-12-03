@@ -1,5 +1,5 @@
 /*
-by faker 20211128
+by faker 20211203
 35 1,23 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/Script/Task/JD/jd_nzmh.js, tag=女装盲盒, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 活动时间：2021-12-1至2021-12-31
