@@ -1,5 +1,5 @@
 /*
-by JDHelloWorld 20211110
+by faker 20211126
 20 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_jxmc.js, tag=京喜牧场, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_jxmc.png, enabled=true
 
 活动入口：京喜APP-我的-京喜牧场
