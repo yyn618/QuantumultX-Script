@@ -3,8 +3,7 @@ by JDHelloWorld 20211017
 13 1,6,22 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_health.js, tag=东东健康社区, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png, enabled=true
 
 活动入口：京东APP首页搜索 "玩一玩"即可
-*/
-/*
+*//*
 author: 疯疯
 东东健康社区
 更新时间：2021-4-22
