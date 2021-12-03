@@ -1,6 +1,6 @@
 /*
 by faker 20211128
-40 0,2 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/Script/Task/JD/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
+40 0,2 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 活动入口：京东-京东众筹-众筹许愿池
 */
