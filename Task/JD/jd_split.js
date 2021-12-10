@@ -1,5 +1,5 @@
 /*
-by smiek2121 20211101
+by faker 20211207
 10 0,2 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_split.js, tag=金榜年终奖, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 活动入口：APP首页-领京豆-升级赚京豆
 地址：https://h5.m.jd.com/rn/42yjy8na6pFsq1cx9MJQ5aTgu3kX/index.html
