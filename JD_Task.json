@@ -7,7 +7,7 @@
 "0 7,19 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_speed_sign.js, tag=京东极速版签到（40min）, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "10 0,22 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_speed_redpocke.js, tag=京东极速版红包, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png", 
 "10 0 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_shop.js, tag=进店领豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_shop.png",
-"12 0-23/6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_plantBean.js, tag=种豆得豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdzd.png",
+"1 7-21/2 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_plantBean.js, tag=种豆得豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdzd.png",
 "15 6-18/6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_pet.js, tag=东东萌宠, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdmc.png",
 "20 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_big_winner.js, tag=省钱大赢家之翻翻乐, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "10 7 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_ms.js, tag=京东秒秒币, img-url=https://raw.githubusercontent.com/yogayyy/Scripts/master/Icon/shylocks/jd_ms.jpg",
@@ -57,5 +57,6 @@
 "40 0,2 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "35 1,23 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_nzmh.js, tag=女装盲盒, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "0 0 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_ddworld_exchange.js, tag=东东世界兑换, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
+"10 0,2 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_split.js, tag=金榜年终奖, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
     ]
 }
