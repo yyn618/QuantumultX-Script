@@ -1,5 +1,5 @@
 /*
-by JDHelloWorld 20211108
+by JDHelloWorld 20211204
 5 6-18/6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_fruit.js, tag=东东农场, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdnc.png, enabled=true
 
 活动入口：京东APP-我的-东东牧场-东东农场
@@ -24,6 +24,12 @@ const urlSchema = `openjd://virtual?params=%7B%20%22category%22:%20%22jump%22,%2
   if (!cookiesArr[0]) {
     $.msg($.name, '【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取', 'https://bean.m.jd.com/bean/signIndex.action', {"open-url": "https://bean.m.jd.com/bean/signIndex.action"});
     return;
+  }
+  if ($.isNode()) {
+    if (process.argv[2]) {
+      cookiesArr = [decodeURIComponent(process.argv[2])];
+      console.log(`收到Cookie：${decodeURIComponent(cookiesArr[0])}`)
+    }
   }
   for (let i = 0; i < cookiesArr.length; i++) {
     if (cookiesArr[i]) {
@@ -65,7 +71,7 @@ async function jdFruit() {
         }
         await $.wait(Math.floor(Math.random() * 10 + 3) * 1000)
       }
-
+      console.log('当前种植', $.farmInfo.farmUserPro.name)
       console.log(`\n【已成功兑换水果】${$.farmInfo.farmUserPro.winTimes}次\n`);
       message += `【已兑换水果】${$.farmInfo.farmUserPro.winTimes}次\n`;
       await masterHelpShare();//助力好友
@@ -118,10 +124,8 @@ function runTimes() {
         console.log('上报失败', err)
         reject(err)
       } else {
-        if (data === '1' || data === '0') {
-          console.log('上报成功')
-          resolve()
-        }
+        console.log(data)
+        resolve()
       }
     })
   })
