@@ -58,7 +58,6 @@ let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
 let intPerSent = 0;
 let i = 0;
-let DisableCash = "false";
 let llShowMonth = false;
 let Today = new Date();
 let strAllNotify="";
@@ -113,9 +112,6 @@ if ($.isNode() && process.env.BEANCHANGE_USERGP4) {
 	console.log(`检测到设定了分组推送4,将禁用分段通知`);
 }
 
-if ($.isNode() && process.env.BEANCHANGE_DISABLECASH) {
-	DisableCash = process.env.BEANCHANGE_DISABLECASH;
-}
 
 
 //取消月结查询
