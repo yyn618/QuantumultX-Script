@@ -246,9 +246,7 @@ if ($.isNode()) {
 
 			await getJxFactory(); //京喜工厂
 			await getDdFactoryInfo(); // 京东工厂
-			if (DisableCash == "false") {
-				await jdCash();
-			}
+
 
 			await showMsg();
 			if (intPerSent > 0) {
@@ -565,21 +563,6 @@ async function showMsg() {
 		ReturnMessage += `【京东秒杀】${$.JdMsScore}币(≈${($.JdMsScore / 1000).toFixed(2)}元)\n`;
 	}
 
-	if ($.joylevel || $.jdCash) {
-		ReturnMessage += `【其他信息】`;
-		if ($.joylevel) {
-			ReturnMessage += `汪汪:${$.joylevel}级`;
-			if ($.jdCash) {
-				ReturnMessage += ",";
-			}
-		}
-		if ($.jdCash) {
-			ReturnMessage += `领现金:${$.jdCash}元`;
-		}
-
-		ReturnMessage += `\n`;
-
-	}
 
 	if ($.JdFarmProdName != "") {
 		if ($.JdtreeEnergy != 0) {
