@@ -198,7 +198,6 @@ if ($.isNode()) {
 			$.DdFactoryReceive = '';
 			$.jxFactoryInfo = '';
 			$.jxFactoryReceive = '';
-			$.jdCash = 0;
 			$.isPlusVip = 0;
 			$.JingXiang = "";
 			$.allincomeBean = 0; //月收入
@@ -234,7 +233,6 @@ if ($.isNode()) {
 				"babelChannel": "120"
 			});
 			await getjdfruit();
-			await cash();
 			await requestAlgo();
 			await JxmcGetRequest();
 			await bean();
