@@ -69,8 +69,6 @@ RemainMessage += "⭕提醒:⭕" + '\n';
 RemainMessage += '【极速金币】京东极速版->我的->金币(极速版使用)\n';
 RemainMessage += '【京东赚赚】微信->京东赚赚小程序->底部赚好礼->提现无门槛红包(京东使用)\n';
 RemainMessage += '【京东秒杀】京东->中间频道往右划找到京东秒杀->中间点立即签到->兑换无门槛红包(京东使用)\n';
-RemainMessage += '【东东萌宠】京东->我的->东东萌宠,完成是京东红包,可以用于京东app的任意商品\n';
-RemainMessage += '【领现金】京东->我的->东东萌宠->领现金(微信提现+京东红包)\n';
 RemainMessage += '【东东农场】京东->我的->东东农场,完成是京东红包,可以用于京东app的任意商品\n';
 RemainMessage += '【京喜工厂】京喜->我的->京喜工厂,完成是商品红包,用于购买指定商品(不兑换会过期)\n';
 RemainMessage += '【其他】京喜红包只能在京喜使用,其他同理';
@@ -686,65 +684,6 @@ async function showMsg() {
 
 	}
 	
-	llPetError=false;
-	const response = await PetRequest('energyCollect');
-	const initPetTownRes = await PetRequest('initPetTown');
-	if(!llPetError && initPetTownRes){
-		if (initPetTownRes.code === '0' && initPetTownRes.resultCode === '0' && initPetTownRes.message === 'success') {
-			$.petInfo = initPetTownRes.result;
-			if ($.petInfo.userStatus === 0) {
-				ReturnMessage += `【东东萌宠】活动未开启!\n`;
-			} else if ($.petInfo.petStatus === 5) {
-				ReturnMessage += `【东东萌宠】${$.petInfo.goodsInfo.goodsName}已可领取!\n`;
-				TempBaipiao += `【东东萌宠】${$.petInfo.goodsInfo.goodsName}已可领取!\n`;
-				if (userIndex2 != -1) {
-					ReceiveMessageGp2 += `【账号${IndexGp2} ${$.nickName || $.UserName}】${$.petInfo.goodsInfo.goodsName}可以兑换了! (东东萌宠)\n`;
-				}
-				if (userIndex3 != -1) {
-					ReceiveMessageGp3 += `【账号${IndexGp3} ${$.nickName || $.UserName}】${$.petInfo.goodsInfo.goodsName}可以兑换了! (东东萌宠)\n`;
-				}
-				if (userIndex4 != -1) {
-					ReceiveMessageGp4 += `【账号${IndexGp4} ${$.nickName || $.UserName}】${$.petInfo.goodsInfo.goodsName}可以兑换了! (东东萌宠)\n`;
-				}
-				if (userIndex2 == -1 && userIndex3 == -1 && userIndex4 == -1) {
-					allReceiveMessage += `【账号${IndexAll} ${$.nickName || $.UserName}】${$.petInfo.goodsInfo.goodsName}可以兑换了! (东东萌宠)\n`;
-				}
-			} else if ($.petInfo.petStatus === 6) {
-				TempBaipiao += `【东东萌宠】未选择物品! \n`;
-				if (userIndex2 != -1) {
-					WarnMessageGp2 += `【账号${IndexGp2} ${$.nickName || $.UserName}】未选择物品! (东东萌宠)\n`;
-				}
-				if (userIndex3 != -1) {
-					WarnMessageGp3 += `【账号${IndexGp3} ${$.nickName || $.UserName}】未选择物品! (东东萌宠)\n`;
-				}
-				if (userIndex4 != -1) {
-					WarnMessageGp4 += `【账号${IndexGp4} ${$.nickName || $.UserName}】未选择物品! (东东萌宠)\n`;
-				}
-				if (userIndex2 == -1 && userIndex3 == -1 && userIndex4 == -1) {
-					allWarnMessage += `【账号${IndexAll} ${$.nickName || $.UserName}】未选择物品! (东东萌宠)\n`;
-				}
-			} else if (response.resultCode === '0') {
-				ReturnMessage += `【东东萌宠】${$.petInfo.goodsInfo.goodsName}`;
-				ReturnMessage += `(${(response.result.medalPercent).toFixed(0)}%,${response.result.medalNum}/${response.result.medalNum+response.result.needCollectMedalNum}块)\n`;
-			} else if (!$.petInfo.goodsInfo) {
-				ReturnMessage += `【东东萌宠】暂未选购新的商品!\n`;
-				TempBaipiao += `【东东萌宠】暂未选购新的商品! \n`;
-				if (userIndex2 != -1) {
-					WarnMessageGp2 += `【账号${IndexGp2} ${$.nickName || $.UserName}】暂未选购新的商品! (东东萌宠)\n`;
-				}
-				if (userIndex3 != -1) {
-					WarnMessageGp3 += `【账号${IndexGp3} ${$.nickName || $.UserName}】暂未选购新的商品! (东东萌宠)\n`;
-				}
-				if (userIndex4 != -1) {
-					WarnMessageGp4 += `【账号${IndexGp4} ${$.nickName || $.UserName}】暂未选购新的商品! (东东萌宠)\n`;
-				}
-				if (userIndex2 == -1 && userIndex3 == -1 && userIndex4 == -1) {
-					allWarnMessage += `【账号${IndexAll} ${$.nickName || $.UserName}】暂未选购新的商品! (东东萌宠)\n`;
-				}
-
-			}
-		}
-	}
 	if(strGuoqi){		
 		ReturnMessage += `💸💸💸临期京豆明细💸💸💸\n`;
 		ReturnMessage += `${strGuoqi}`;
@@ -932,57 +871,6 @@ async function Monthbean() {
 
 }
 
-async function jdCash() {
-	let functionId = "cash_homePage"
-		let body = "%7B%7D"
-		let uuid = randomString(16)
-		console.log(`正在获取领现金任务签名...`);
-	isSignError = false;
-	let sign = await getSign(functionId, decodeURIComponent(body), uuid)
-		if (isSignError) {
-			console.log(`领现金任务签名获取失败,等待2秒后再次尝试...`)
-			await $.wait(2 * 1000);
-			isSignError = false;
-			sign = await getSign(functionId, decodeURIComponent(body), uuid);
-		}
-		if (isSignError) {
-			console.log(`领现金任务签名获取失败,等待2秒后再次尝试...`)
-			await $.wait(2 * 1000);
-			isSignError = false;
-			sign = await getSign(functionId, decodeURIComponent(body), uuid);
-		}
-		if (!isSignError) {
-			console.log(`领现金任务签名获取成功...`)
-		} else {
-			console.log(`领现金任务签名获取失败...`)
-			$.jdCash = 0;
-			return
-		}
-		let url = `${JD_API_HOST}?functionId=${functionId}&build=167774&client=apple&clientVersion=10.1.0&uuid=${uuid}&${sign}`
-		return new Promise((resolve) => {
-			$.post(apptaskUrl(url, body), async(err, resp, data) => {
-				try {
-					if (err) {
-						console.log(`${JSON.stringify(err)}`)
-						console.log(`jdCash API请求失败，请检查网路重试`)
-					} else {
-						if (safeGet(data)) {
-							data = JSON.parse(data);
-							if (data.code === 0 && data.data.result) {
-								$.jdCash = data.data.result.totalMoney || 0;
-								return
-							}
-						}
-					}
-				} catch (e) {
-					$.logErr(e, resp)
-				}
-				finally {
-					resolve(data);
-				}
-			})
-		})
-}
 function apptaskUrl(url, body) {
 	return {
 		url,
@@ -1538,28 +1426,6 @@ function jdfruitRequest(function_id, body = {}, timeout = 1000) {
 	})
 }
 
-async function PetRequest(function_id, body = {}) {
-	await $.wait(3000);
-	return new Promise((resolve, reject) => {
-		$.post(taskPetUrl(function_id, body), (err, resp, data) => {
-			try {
-				if (err) {
-					llPetError=true;
-					console.log('\n东东萌宠: API查询请求失败 ‼️‼️');
-					console.log(JSON.stringify(err));
-					$.logErr(err);
-				} else {
-					data = JSON.parse(data);
-				}
-			} catch (e) {
-				$.logErr(e, resp);
-			}
-			finally {
-				resolve(data)
-			}
-		})
-	})
-}
 function taskPetUrl(function_id, body = {}) {
 	body["version"] = 2;
 	body["channel"] = 'app';
@@ -1598,39 +1464,6 @@ function safeGet(data) {
 	}
 }
 
-function cash() {
-	return new Promise(resolve => {
-		$.get(taskcashUrl('MyAssetsService.execute', {
-				"method": "userCashRecord",
-				"data": {
-					"channel": 1,
-					"pageNum": 1,
-					"pageSize": 20
-				}
-			}),
-			async(err, resp, data) => {
-			try {
-				if (err) {
-					console.log(`${JSON.stringify(err)}`)
-					console.log(`cash API请求失败，请检查网路重试`)
-				} else {
-					if (safeGet(data)) {
-						data = JSON.parse(data);
-						if (data.data.goldBalance)
-							$.JDtotalcash = data.data.goldBalance;
-						else
-							console.log(`领现金查询失败，服务器没有返回具体值.`)
-					}
-				}
-			} catch (e) {
-				$.logErr(e, resp)
-			}
-			finally {
-				resolve(data);
-			}
-		})
-	})
-}
 
 var __Oxb24bc = ["lite-android&", "stringify", "&android&3.1.0&", "&", "&846c4c32dae910ef", "12aea658f76e453faf803d15c40a72e0", "isNode", "crypto-js", "", "api?functionId=", "&body=", "&appid=lite-android&client=android&uuid=846c4c32dae910ef&clientVersion=3.1.0&t=", "&sign=", "api.m.jd.com", "*/*", "RN", "JDMobileLite/3.1.0 (iPad; iOS 14.4; Scale/2.00)", "zh-Hans-CN;q=1, ja-CN;q=0.9", "undefined", "log", "", "", "", "", "jsjia", "mi.com"];
 
