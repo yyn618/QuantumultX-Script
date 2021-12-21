@@ -1,5 +1,5 @@
 /*
-by faker 20211120
+by faker 20211215
  23 8,20 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_superBrand.js
  */
 
