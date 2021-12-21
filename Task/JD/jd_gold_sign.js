@@ -1,9 +1,10 @@
 /*
-京东金榜 by faker 20211125
+京东金榜 by faker 20211215
  13 6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_gold_sign.js
  
  活动地址：https://h5.m.jd.com/babelDiy/Zeus/2H5Ng86mUJLXToEo57qWkJkjFPxw/index.html
  */
+
 const $ = new Env('京东金榜');
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
@@ -79,11 +80,9 @@ function goldCenterHead() {
           if (safeGet(data)) {
             data = JSON.parse(data)
             if (data.code === '0') {
-              // console.log(data);
+               await goldCreatorDoTask({ "type": 1 })
               if (data.result.medalNum === 5) {
                 await goldCreatorDoTask({ "type": 2 })
-              } else {
-                await goldCreatorDoTask({ "type": 1 })
               }
             } else {
               console.log(`失败：${JSON.stringify(data)}\n`);
