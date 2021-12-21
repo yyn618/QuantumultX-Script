@@ -1,5 +1,5 @@
 /*
-by faker 20211113
+by faker 20211214
 20 1,8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_jxsign.js, tag=京喜签到, mg-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png, enabled=true
 
 活动入口：京喜APP-我的-京喜签到
@@ -480,7 +480,7 @@ async function requestAlgo() {
       "expandParams": ""
     })
   }
-  new Promise(async resolve => {
+  return new Promise(async resolve => {
     $.post(options, (err, resp, data) => {
       try {
         if (err) {
