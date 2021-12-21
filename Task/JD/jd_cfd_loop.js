@@ -1,5 +1,5 @@
 /*
-by faker 20211114
+by faker 20211220
 30 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_cfd_loop.js, tag=京喜财富岛热气球, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true
 
 活动入口：京喜APP-我的-京喜财富岛
@@ -65,7 +65,7 @@ if ($.isNode()) {
         await $.wait(time)
       }
     }
-  } while (count < 25)
+  } while (count < (process.env.CFD_LOOP_LIMIT || 10)*1)
 })()
   .catch((e) => $.logErr(e))
   .finally(() => $.done());
@@ -320,7 +320,7 @@ async function requestAlgo() {
       "expandParams": ""
     })
   }
-  new Promise(async resolve => {
+  return new Promise(async resolve => {
     $.post(options, (err, resp, data) => {
       try {
         if (err) {
