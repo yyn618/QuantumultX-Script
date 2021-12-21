@@ -58,5 +58,9 @@
 "35 1,23 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_nzmh.js, tag=女装盲盒, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "0 0 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_ddworld_exchange.js, tag=东东世界兑换, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "10 0,2 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_split.js, tag=金榜年终奖, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
+"0 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_redrain.js, tag=整点京豆雨, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
+"31 20-23/1 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_redrain_half.js, tag=整点京豆雨, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
+"0 0 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_tyt.js, tag=推一推, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
+"14 10 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_sign_graphics.js, tag=京东签到图形验证, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
     ]
 }
