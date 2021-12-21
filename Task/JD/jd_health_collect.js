@@ -1,5 +1,5 @@
 /*
-by JDHelloWorld 20211127
+by JDHelloWorld 20211212
 5-45/20 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_health_collect.js, tag=东东健康社区收能量, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png, enabled=true
 
 活动入口：京东APP首页搜索 "玩一玩"即可
