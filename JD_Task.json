@@ -62,5 +62,9 @@
 "31 20-23/1 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_redrain_half.js, tag=整点京豆雨, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "0 0 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_tyt.js, tag=推一推, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "14 10 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_sign_graphics.js, tag=京东签到图形验证, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
+"10 5,17 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_fruit_friend.js, tag=东东农场好友删减奖励, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdnc.png",
+"3 0 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_m_sign.js, tag=京东通天塔--签到, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true",
+"0 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_rush_lzdz1_nh.js, tag=大牌联合 年货盛宴, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true",
+"20 8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_sgmh.js, tag=闪购盲盒, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jxcfd.png, enabled=true",
     ]
 }
