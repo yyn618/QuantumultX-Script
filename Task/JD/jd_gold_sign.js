@@ -1,5 +1,5 @@
 /*
-京东金榜 by faker 20211215
+京东金榜 by faker 20220105
  13 6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_gold_sign.js
  
  活动地址：https://h5.m.jd.com/babelDiy/Zeus/2H5Ng86mUJLXToEo57qWkJkjFPxw/index.html
@@ -53,6 +53,7 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
         }
         continue
       }
+      await goldCreatorDoTask({ "type": 1 })
       await goldCenterHead();
 
     }
@@ -80,8 +81,8 @@ function goldCenterHead() {
           if (safeGet(data)) {
             data = JSON.parse(data)
             if (data.code === '0') {
-               await goldCreatorDoTask({ "type": 1 })
               if (data.result.medalNum === 5) {
+                await $.wait(1500)
                 await goldCreatorDoTask({ "type": 2 })
               }
             } else {
@@ -101,7 +102,6 @@ function goldCenterHead() {
 function goldCreatorDoTask(body) {
   return new Promise(resolve => {
     const options = taskUrl('goldCenterDoTask', body)
-    // console.log(options);
     $.get(options, async (err, resp, data) => {
       try {
         if (err) {
