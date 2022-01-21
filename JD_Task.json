@@ -65,5 +65,11 @@
 "3 0 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_m_sign.js, tag=京东通天塔--签到, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "0 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_rush_lzdz1_nh.js, tag=大牌联合 年货盛宴, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
 "20 8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_sgmh.js, tag=闪购盲盒, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
+"10 8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_fanli.js, tag=京东饭粒, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
+"30 7 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_ddly.js, tag=东东乐园, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
+"20 8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_lzdz1_customized10.js, tag=大牌好礼带回家, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
+"10 8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_mpdzcar.js, tag=头文字J,img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
+"31 8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_mofang_ex.js, tag=京东小魔方--收集兑换,img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
+"23 8,9 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_tewu.js, tag=特务Z, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png",
     ]
 }
