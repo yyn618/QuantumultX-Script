@@ -1,5 +1,5 @@
 /*
-by faker 20211214
+by faker 20220121
 20 1,8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_jxsign.js, tag=京喜签到, mg-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png, enabled=true
 
 活动入口：京喜APP-我的-京喜签到
@@ -17,13 +17,12 @@ const JD_API_HOST = "https://m.jingxi.com/";
 const notify = $.isNode() ? require('./sendNotify') : '';
 //Node.js用户请在jdCookie.js处填写京东ck;
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
-let jdNotify = true;//是否关闭通知，false打开通知推送，true关闭通知推送
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '', message;
 let UA, UAInfo = {}, isLoginInfo = {};
 $.shareCodes = [];
 $.blackInfo = {}
-$.appId = 10028;
+const JX_FIRST_RUNTASK = $.isNode() ? (process.env.JX_FIRST_RUNTASK && process.env.JX_FIRST_RUNTASK === 'xd' ? '5' : '1000') : ($.getdata('JX_FIRST_RUNTASK') && $.getdata('JX_FIRST_RUNTASK') === 'xd' ? '5' : '1000')
 if ($.isNode()) {
   Object.keys(jdCookieNode).forEach((item) => {
     cookiesArr.push(jdCookieNode[item])
@@ -34,8 +33,6 @@ if ($.isNode()) {
 }
 !(async () => {
   $.CryptoJS = $.isNode() ? require("crypto-js") : CryptoJS;
-  await requestAlgo();
-  await $.wait(1000);
   if (!cookiesArr[0]) {
     $.msg($.name, "【提示】请先获取京东账号一cookie\n直接使用NobyDa的京东签到获取", "https://bean.m.jd.com/bean/signIndex.action", { "open-url": "https://bean.m.jd.com/bean/signIndex.action" });
     return;
@@ -57,6 +54,13 @@ if ($.isNode()) {
       }
       if (i === 0) console.log(`\n正在收集助力码请等待\n`)
       if (!isLoginInfo[$.UserName]) continue
+      if (JX_FIRST_RUNTASK === '5') {
+        $.signhb_source = '5'
+        await requestAlgo();
+      } else if (JX_FIRST_RUNTASK === '1000') {
+        $.signhb_source = '1000'
+        await requestAlgo();
+      }
       await signhb(1)
       await $.wait(500)
     }
@@ -69,10 +73,6 @@ if ($.isNode()) {
       $.isLogin = true;
       $.nickName = '';
       message = '';
-      $.commonlist = []
-      $.bxNum = []
-      $.black = false
-      $.canHelp = true
       if (isLoginInfo[$.UserName] === false) {
       
       } else {
@@ -91,55 +91,28 @@ if ($.isNode()) {
         continue
       }
       UA = UAInfo[$.UserName]
-      await signhb(2)
-      await $.wait(2000)
-      if ($.canHelp) {
-        if ($.shareCodes && $.shareCodes.length) {
-          console.log(`\n开始内部互助\n`)
-          for (let j = 0; j < $.shareCodes.length; j++) {
-            if ($.shareCodes[j].num == $.domax) {
-              $.shareCodes.splice(j, 1)
-              j--
-              continue
-            }
-            if ($.shareCodes[j].use === $.UserName) {
-              console.log(`不能助力自己`)
-              continue
-            }
-            console.log(`账号 ${$.UserName} 去助力 ${$.shareCodes[j].use} 的互助码 ${$.shareCodes[j].smp}`)
-            if ($.shareCodes[j].max) {
-              console.log(`您的好友助力已满`)
-              continue
-            }
-            await helpSignhb($.shareCodes[j].smp)
-            await $.wait(2000)
-            if (!$.black) $.shareCodes[j].num++
-            break
-          }
-        }
-      } else {
-        console.log(`今日已签到，无法助力好友啦~`)
-      }
-      if (!$.black) {
-        await helpSignhb()
-        if ($.commonlist && $.commonlist.length) {
-          console.log("开始做红包任务")
-          for (let j = 0; j < $.commonlist.length; j++) {
-            await dotask($.commonlist[j]);
-            await $.wait(2000);
-          }
-        } else {
-          console.log("红包任务已完成")
-        }
-        if ($.bxNum && $.bxNum.length) {
-          for (let j = 0; j < $.bxNum[0].bxNum; j++) {
-            await bxdraw()
-            await $.wait(2000)
-          }
-        }
-        await doubleSign()
-      } else {
-        console.log(`此账号已黑`)
+      if (JX_FIRST_RUNTASK === '5') {
+        console.log(`开始运行喜豆任务`)
+        $.taskName = '喜豆'
+        $.signhb_source = '5'
+        await requestAlgo();
+        await main()
+        console.log(`\n开始运行红包任务`)
+        $.taskName = '红包'
+        $.signhb_source = '1000'
+        await requestAlgo();
+        await main(false)
+      } else if (JX_FIRST_RUNTASK === '1000') {
+        console.log(`开始运行红包任务`)
+        $.taskName = '红包'
+        $.signhb_source = '1000'
+        await requestAlgo();
+        await main()
+        console.log(`\n开始运行喜豆任务`)
+        $.taskName = '喜豆'
+        $.signhb_source = '5'
+        await requestAlgo();
+        await main(false)
       }
     }
   }
@@ -151,23 +124,99 @@ if ($.isNode()) {
     $.done();
   })
 
+async function main(help = true) {
+  $.commonlist = []
+  $.bxNum = []
+  $.black = false
+  $.canHelp = true
+  await signhb(2)
+  await $.wait(2000)
+  if (!$.sqactive && $.signhb_source === '5') {
+    console.log(`未选择自提点，跳过执行`)
+    return
+  }
+  if (help) {
+    if ($.canHelp) {
+      if ($.shareCodes && $.shareCodes.length) {
+        console.log(`\n开始内部互助\n`)
+        for (let j = 0; j < $.shareCodes.length; j++) {
+          if ($.shareCodes[j].num == $.shareCodes[j].domax) {
+            $.shareCodes.splice(j, 1)
+            j--
+            continue
+          }
+          if ($.shareCodes[j].use === $.UserName) {
+            console.log(`不能助力自己`)
+            continue
+          }
+          console.log(`账号 ${$.UserName} 去助力 ${$.shareCodes[j].use} 的互助码 ${$.shareCodes[j].smp}`)
+          if ($.shareCodes[j].max) {
+            console.log(`您的好友助力已满`)
+            continue
+          }
+          await helpSignhb($.shareCodes[j].smp)
+          await $.wait(2000)
+          if (!$.black) $.shareCodes[j].num++
+          break
+        }
+      }
+    } else {
+      console.log(`今日已签到，无法助力好友啦~`)
+    }
+  }
+  if (!$.black) {
+    await helpSignhb()
+    if ($.commonlist && $.commonlist.length) {
+      console.log(`开始做${$.taskName}任务`)
+      for (let j = 0; j < $.commonlist.length && !$.black; j++) {
+        await dotask($.commonlist[j]);
+        await $.wait(2000);
+      }
+    } else {
+      console.log(`${$.taskName}任务已完成`)
+    }
+    if ($.bxNum && $.bxNum.length) {
+      for (let j = 0; j < $.bxNum[0].bxNum; j++) {
+        await bxdraw()
+        await $.wait(2000)
+      }
+    }
+    if ($.signhb_source === '1000') await SignedInfo()
+  } else {
+    console.log(`此账号已黑`)
+  }
+  await $.wait(2000)
+}
+
 // 查询信息
 function signhb(type = 1) {
+  let body = '';
+  if ($.signhb_source === '5') body = `type=0&signhb_source=${$.signhb_source}&smp=&ispp=1&tk=`
   return new Promise((resolve) => {
-    $.get(taskUrl("signhb/query"), async (err, resp, data) => {
+    $.get(taskUrl("signhb/query", body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err));
           console.log(`${$.name} query签到 API请求失败，请检查网路重试`);
         } else {
           data = JSON.parse(data.match(new RegExp(/jsonpCBK.?\((.*);*/))[1])
+          if ($.signhb_source === '5') {
+            $.sqactive = '';
+            if (!data.sqactive) return
+            $.sqactive = data.sqactive
+          }
           const {
             smp,
             commontask,
-            sharetask: { domax, helppic, status },
+            sharetask,
             signlist = []
           } = data
-          $.domax = domax
+          let domax, helppic, status
+          if (sharetask) {
+            domax = sharetask.domax
+            helppic = sharetask.helppic
+            status = sharetask.status
+          }
           let helpNum = 0
           if (helppic) helpNum = helppic.split(";").length - 1
           switch (type) {
@@ -179,7 +228,8 @@ function signhb(type = 1) {
                   'use': $.UserName,
                   'smp': smp,
                   'num': helpNum || 0,
-                  'max': max
+                  'max': max,
+                  'domax': domax
                 })
               }
               break
@@ -197,9 +247,11 @@ function signhb(type = 1) {
               }
               console.log(`【签到互助码】${smp}`)
               if (helpNum) console.log(`已有${helpNum}人助力`)
-              for (let i = 0; i < commontask.length; i++) {
-                if (commontask[i].task && commontask[i].status != 2) {
-                  $.commonlist.push(commontask[i].task)
+              if (commontask) {
+                for (let i = 0; i < commontask.length; i++) {
+                  if (commontask[i].task && commontask[i].status != 2) {
+                    $.commonlist.push(commontask[i].task)
+                  }
                 }
               }
               console.log(`可开启宝箱${data.baoxiang_left}个`)
@@ -223,7 +275,7 @@ function signhb(type = 1) {
 // 签到 助力
 function helpSignhb(smp = '') {
   return new Promise((resolve) => {
-    $.get(taskUrl("signhb/query", `type=1&signhb_source=1000&smp=${smp}&ispp=0&tk=`), async (err, resp, data) => {
+    $.get(taskUrl("signhb/query", `type=1&signhb_source=${$.signhb_source}&smp=${smp}&ispp=1&tk=`), async (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err))
@@ -256,8 +308,14 @@ function helpSignhb(smp = '') {
 
 // 任务
 function dotask(task) {
+  let body;
+  if ($.signhb_source === '5') {
+    body = `task=${task}&signhb_source=${$.signhb_source}&ispp=1&sqactive=${$.sqactive}&tk=`
+  } else {
+    body = `task=${task}&signhb_source=${$.signhb_source}&ispp=1&tk=`
+  }
   return new Promise((resolve) => {
-    $.get(taskUrl("signhb/dotask", `signhb_source=1000&task=${task}&ispp=0&tk=`), async (err, resp, data) => {
+    $.get(taskUrl("signhb/dotask", body), async (err, resp, data) => {
         try {
           if (err) {
             console.log(JSON.stringify(err));
@@ -265,9 +323,12 @@ function dotask(task) {
           } else {
             data = JSON.parse(data.match(new RegExp(/jsonpCBK.?\((.*);*/))[1])
             if (data.ret === 0) {
-              console.log(`完成任务 获得${data.sendhb}红包`);
+              console.log($.signhb_source === '5' ? `完成任务 获得${data.sendxd}喜豆` : `完成任务 获得${data.sendhb}红包`);
+            } else if (data.ret === 1003) {
+              console.log(`此账号已黑`);
+              $.black = true;
             } else {
-              console.log(data.errmsg);
+              console.log(JSON.stringify(data));
             }
           }
         } catch (e) {
@@ -281,8 +342,14 @@ function dotask(task) {
 
 // 宝箱
 function bxdraw() {
+  let body;
+  if ($.signhb_source === '5') {
+    body = `ispp=1&sqactive=${$.sqactive}&tk=`
+  } else {
+    body = `ispp=1&tk=`
+  }
   return new Promise((resolve) => {
-    $.get(taskUrl("signhb/bxdraw"), async (err, resp, data) => {
+    $.get(taskUrl("signhb/bxdraw", body), async (err, resp, data) => {
       try {
         if (err) {
           console.log(JSON.stringify(err));
@@ -290,9 +357,9 @@ function bxdraw() {
         } else {
           data = JSON.parse(data.match(new RegExp(/jsonpCBK.?\((.*);*/))[1])
           if (data.ret === 0) {
-            console.log(`开启宝箱 获得${data.sendhb}红包`);
+            console.log($.signhb_source === '5' ? `开启宝箱 获得${data.sendxd}喜豆` : `开启宝箱 获得${data.sendhb}红包`);
           } else {
-            console.log(data.errmsg);
+            console.log(JSON.stringify(data));
           }
         }
       } catch (e) {
@@ -305,32 +372,51 @@ function bxdraw() {
 }
 
 // 双签
-function doubleSign() {
-  return new Promise((resolve) => {
-    let options = {
-      url: `${JD_API_HOST}double_sign/IssueReward?sceneval=2&g_login_type=1&_ste=1&g_ty=ajax`,
-      headers: {
-        "Host": "m.jingxi.com",
-        "Accept": "application/json",
-        "Origin": "https://st.jingxi.com",
-        "Accept-Encoding": "gzip, deflate, br",
-        "User-Agent": UA,
-        "Accept-Language": "zh-CN,zh-Hans;q=0.9",
-        "Referer": "https://st.jingxi.com/",
-        "Cookie": cookie
-      }
-    }
-    $.get(options, async (err, resp, data) => {
+function SignedInfo() {
+  return new Promise(resolve => {
+    $.get(JDtaskUrl("SignedInfo", `_=${Date.now()}`), async (err, resp, data) => {
       try {
         if (err) {
-          console.log(`${JSON.stringify(err)}`)
+          console.log(JSON.stringify(err))
+          console.log(`${$.name} SignedInfo API请求失败，请检查网路重试`)
+        } else {
+          data = JSON.parse(data);
+          const { data: { jd_sign_status, jx_sign_status, double_sign_status } } = data
+          if (data.retCode === 0) {
+            if (double_sign_status === 0) {
+              if (jd_sign_status === 1 && jx_sign_status === 1) {
+                await IssueReward()
+              } else {
+                console.log(`京东或京喜未签到，无法双签`)
+              }
+            } else {
+              console.log(`已完成双签`)
+            }
+          } else {
+            console.log(JSON.stringify(data))
+          }
+        }
+      } catch (e) {
+        $.logErr(e, resp)
+      } finally {
+        resolve(data);
+      }
+    })
+  })
+}
+function IssueReward() {
+  return new Promise(resolve => {
+    $.get(JDtaskUrl("IssueReward"), async (err, resp, data) => {
+      try {
+        if (err) {
+          console.log(JSON.stringify(err))
           console.log(`${$.name} IssueReward API请求失败，请检查网路重试`)
         } else {
           data = JSON.parse(data);
           if (data.retCode === 0){
-            console.log(`双签成功`)
+            console.log(`双签成功：获得${data.data.jx_award}京豆`)
           } else {
-            console.log(`任务完成失败，错误信息${data.errMsg}`)
+            console.log(`任务完成失败，错误信息${JSON.stringify(data)}`)
           }
         }
       } catch (e) {
@@ -364,13 +450,29 @@ function taskUrl(functionId, body = '') {
     }
   }
 }
+function JDtaskUrl(functionId, body = '') {
+  let url = `https://wq.jd.com/jxjdsignin/${functionId}?${body ? `${body}&` : ''}sceneval=2&g_login_type=1&g_ty=ajax`
+  return {
+    url,
+    headers: {
+      "Host": "wq.jd.com",
+      "Accept": "application/json",
+      "Origin": "https://wqs.jd.com",
+      "Accept-Encoding": "gzip, deflate, br",
+      "User-Agent": $.isNode() ? (process.env.JD_USER_AGENT ? process.env.JD_USER_AGENT : (require('./USER_AGENTS').USER_AGENT)) : ($.getdata('JDUA') ? $.getdata('JDUA') : "jdapp;iPhone;9.4.4;14.3;network/4g;Mozilla/5.0 (iPhone; CPU iPhone OS 14_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1"),
+      "Accept-Language": "zh-CN,zh-Hans;q=0.9",
+      "Referer": "https://wqs.jd.com/",
+      "Cookie": cookie
+    }
+  }
+}
 function getStk(url) {
   let arr = url.split('&').map(x => x.replace(/.*\?/, "").replace(/=.*/, ""))
   return encodeURIComponent(arr.filter(x => x).sort().join(','))
 }
 function randomString(e) {
   e = e || 32;
-  let t = "0123456789abcdef", a = t.length, n = "";
+  let t = "abcdef0123456789", a = t.length, n = "";
   for (let i = 0; i < e; i++)
     n += t.charAt(Math.floor(Math.random() * a));
   return n
@@ -454,6 +556,11 @@ Date.prototype.Format = function (fmt) {
 }
 
 async function requestAlgo() {
+  if ($.signhb_source === '5') {
+    $.appId = 10038;
+  } else {
+    $.appId = 10028;
+  }
   $.fingerprint = await generateFp();
   const options = {
     "url": `https://cactus.jd.com/request_algo?g_ty=ajax`,
@@ -494,13 +601,13 @@ async function requestAlgo() {
               $.token = data.data.result.tk;
               let enCryptMethodJDString = data.data.result.algo;
               if (enCryptMethodJDString) $.enCryptMethodJD = new Function(`return ${enCryptMethodJDString}`)();
-              console.log(`获取签名参数成功！`)
-              console.log(`fp: ${$.fingerprint}`)
-              console.log(`token: ${$.token}`)
-              console.log(`enCryptMethodJD: ${enCryptMethodJDString}`)
+              // console.log(`获取签名参数成功！`)
+              // console.log(`fp: ${$.fingerprint}`)
+              // console.log(`token: ${$.token}`)
+              // console.log(`enCryptMethodJD: ${enCryptMethodJDString}`)
             } else {
-              console.log(`fp: ${$.fingerprint}`)
-              console.log('request_algo 签名参数API请求失败:')
+              // console.log(`fp: ${$.fingerprint}`)
+              console.log('request_algo 签名参数API请求失败')
             }
           } else {
             console.log(`京东服务器返回空数据`)
