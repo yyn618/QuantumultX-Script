@@ -1,5 +1,5 @@
 /*
-by faker2 20211214
+by faker2 20220117
 0 0 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_tyt.js, tag=推一推, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 活动入口：极速版-推推赚大钱  5元无门槛卷 大概需要50人助力
