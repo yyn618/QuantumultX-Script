@@ -1,37 +1,15 @@
 /*
-by JDHelloWorld 20220119
+by JDHelloWorld 20220222
 10 0,22 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_speed_redpocke.js, tag=京东极速版红包, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdjs.png, enabled=true
 
 活动入口：京东极速版-领红包
 地址：https://prodev.m.jd.com/jdlite/active/31U4T6S4PbcK83HyLPioeCWrD63j/index.html
 */
-/*
-京东极速版红包
-自动提现微信现金
-活动地址：https://prodev.m.jd.com/jdlite/active/31U4T6S4PbcK83HyLPioeCWrD63j/index.html
-活动入口：京东极速版-领红包
-已支持IOS双京东账号,Node.js支持N个京东账号
-脚本兼容: QuantumultX, Surge, Loon, JSBox, Node.js
-============Quantumultx===============
-[task_local]
-#京东极速版红包
-20 0,22 * * * https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed_redpocke.js, tag=京东极速版红包, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-
-================Loon==============
-[Script]
-cron "20 0,22 * * *" script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed_redpocke.js,tag=京东极速版红包
-
-===============Surge=================
-京东极速版红包 = type=cron,cronexp="20 0,22 * * *",wake-system=1,timeout=3600,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed_redpocke.js
-
-============小火箭=========
-京东极速版红包 = type=cron,script-path=https://gitee.com/lxk0301/jd_scripts/raw/master/jd_speed_redpocke.js, cronexpr="20 0,22 * * *", timeout=3600, enable=true
-*/
 
 const $ = new Env('京东极速版红包');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let cookiesArr = [], cookie = '', message;
-const linkIds = ["7ya6o83WSbNhrbYJqsMfFA", "Eu7-E0CUzqYyhZJo9d3YkQ"];
+const linkIds = ["7ya6o83WSbNhrbYJqsMfFA"];
 const signLinkId = '9WA12jYGulArzWS7vcrwhw';
 let linkId
 
