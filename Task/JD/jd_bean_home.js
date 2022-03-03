@@ -1,5 +1,5 @@
 /*
-by faker 20220116
+by faker 20220228
 23 1,12,22 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_bean_home.js, tag=领京豆额外奖励, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_bean_home.png, enabled=true
 
 活动入口：京东APP首页-领京豆
