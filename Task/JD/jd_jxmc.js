@@ -1,5 +1,5 @@
 /*
-by faker 20220118
+by faker 20220323
 20 * * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_jxmc.js, tag=京喜牧场, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd_jxmc.png, enabled=true
 
 活动入口：京喜APP-我的-京喜牧场
@@ -96,9 +96,9 @@ if ($.isNode()) {
     await pasture();
     await $.wait(2000);
   }
-  $.res = await getAuthorShareCode('https://raw.githubusercontent.com/Aaron-lv/updateTeam/master/shareCodes/jxmc.json')
+  $.res = await getAuthorShareCode('https://gitee.com/fatelight/Code/raw/master/jxmc.json')
   if (!$.res) {
-    $.http.get({url: 'https://purge.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jxmc.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
+    $.http.get({url: 'https://gitee.com/fatelight/Code/raw/master/jxmc.json'}).then((resp) => {}).catch((e) => console.log('刷新CDN异常', e));
     await $.wait(1000)
     $.res = await getAuthorShareCode('https://cdn.jsdelivr.net/gh/Aaron-lv/updateTeam@master/shareCodes/jxmc.json')
   }
