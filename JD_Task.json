@@ -82,5 +82,8 @@
 "0 0,7,9,17,20 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_joy_park_task.js, tag=汪汪乐园每日任务, img-url=https://raw.githubusercontent.com/tsukasa007/icon/master/jd_joypark_task.png",
 "15 3,6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_connoisseur.js, tag=内容鉴赏官, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "5 0,23 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_club_lottery.js, tag=摇京豆, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdyjd.png",
+"16 0,5 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_cash_wx.js, tag=微信签到领现金, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
+"10 6,10,12 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_mpdzcar_game.js, tag=头文字J 游戏, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
+"2 6 * * 5 https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_xs_zzl.js, tag=京享周周乐, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
     ]
 }
