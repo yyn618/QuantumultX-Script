@@ -1,6 +1,6 @@
 /*
-by JDHelloWorld 20220119
-0 7,19 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Script/Files/JD/jd_speed_sign.js, tag=京东极速版签到（40min）, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdjs.png, enabled=true
+by JDHelloWorld 20220407
+0 7,19 * * * ttps://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_speed_sign.js, tag=京东极速版签到, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdjs.png, enabled=true
 
 每日9毛左右，满3，10，50可兑换无门槛红包
 ⚠️⚠️⚠️一个号需要运行40分钟左右
