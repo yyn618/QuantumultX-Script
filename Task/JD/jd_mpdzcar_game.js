@@ -1,7 +1,6 @@
 /*
 by faker 20220401
 10 6,10,12 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_mpdzcar_game.js, tag=头文字J 游戏, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
-活动入口：京东APP搜索领现金进入
 */
 
 const $ = new Env('头文字J 游戏');
