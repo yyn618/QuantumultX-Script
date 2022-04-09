@@ -1,5 +1,5 @@
 /*
-by faker 20220110
+by faker 20220301
 10 8 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_mpdzcar.js, tag=头文字J,img-url=https://raw.githubusercontent.com/58xinian/icon/master/jd.png, enabled=true
 
 活动入口:京东汽车 - 右下角 - 领京豆
