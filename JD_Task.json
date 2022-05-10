@@ -85,5 +85,7 @@
 "16 0,5 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_cash_wx.js, tag=微信签到领现金, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "10 6,10,12 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_mpdzcar_game.js, tag=头文字J 游戏, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
 "2 6 * * 5 https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_xs_zzl.js, tag=京享周周乐, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
+"11 0,20 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_js_cash.js, tag=签到领现金, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
+"3 0,7 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_xgyl_wx.js,tag=小鸽有礼, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png",
     ]
 }
