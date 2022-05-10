@@ -1,5 +1,5 @@
 /*
-by faker 20220323
+by faker 20220505
 40 0,2 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/master/Task/JD/jd_wish.js, tag=众筹许愿池, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
 
 活动入口：京东-京东众筹-众筹许愿池
@@ -13,8 +13,8 @@ let message = '', allMessage = '';
 //IOS等用户直接用NobyDa的jd cookie
 let cookiesArr = [], cookie = '';
 const JD_API_HOST = 'https://api.m.jd.com/client.action';
-let appIdArr = ['1EFdRwqyF','1EFZWxKqP','1FFVQyqw','1EFRQwA','1EFRWxKuG', '1E1xZy6s'];
-let appNameArr = ['春尚','新品来袭','1111点心动','疯狂砸金蛋','许愿抽好礼', 'PLUS生活特权'];
+let appIdArr = ['1EFFSyqaC','1FFVQyqw','1EFRWxKuG', '1E1xZy6s'];
+let appNameArr = ['吃货嘉年华','1111点心动','许愿抽好礼', 'PLUS生活特权'];
 let appId, appName;
 $.shareCode = [];
 if ($.isNode()) {
