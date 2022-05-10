@@ -1,5 +1,5 @@
 /*
-by JDHelloWorld 20220407
+by faker 20220509
 15 6-18/6 * * * https://raw.githubusercontent.com/yyn618/QuantumultX-Script/main/Task/JD/jd_pet.js, tag=东东萌宠, img-url=https://raw.githubusercontent.com/58xinian/icon/master/jdmc.png, enabled=true
 
 活动入口：京东APP我的-更多工具-东东萌宠
@@ -138,7 +138,7 @@ async function jdPet() {
 function runTimes() {
   return new Promise((resolve, reject) => {
     $.get({
-      url: `https://api.jdsharecode.xyz/api/runTimes0407?activityId=pet&sharecode=${$.petInfo.shareCode}`
+      url: `https://api.jdsharecode.xyz/api/runTimes0509?activityId=pet&sharecode=${$.petInfo.shareCode}`
     }, (err, resp, data) => {
       if (err) {
         console.log('上报失败', err)
