@@ -1,6 +1,5 @@
 /*
 入会开卡领取礼包(通用)
-
 VENDER_ID // venderId或vendorId的值，多个用&、@或逗号连接，但是不要混用
 OPENCARD_BEAN=""  最小入会值 （默认2）
 OPENCARD_QZ="true"  填写此变量强制开卡，不填写不开启
